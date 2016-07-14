@@ -1,0 +1,86 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+body {
+  padding-top: 20px;
+}
+
+span.timetable-time {
+  color: rgb(128, 128, 128);
+}
+
+span.actual-time {
+  color: rgb(0, 0, 0);
+}
+
+span.timetable-time-wrong {
+    text-decoration: line-through;
+}
+
+span.late-text {
+  color: red;
+}
+
+ul.recent-late-trains {
+  padding: 0;
+}
+
+ul.recent-late-trains li.list-group-item {
+  padding: 0;
+}
+
+ul.recent-late-trains li a {
+  display: block;
+  color: black;
+  padding: 10px 15px 10px 15px;
+}
+
+ul.recent-late-trains li a:hover {
+  background-color: rgb(24, 188, 156);
+  text-decoration: none;
+}
+
+ul.recent-late-trains span.operating-company, span.date, service-description {
+  font-size: 70%;
+}
+
+li.extra-padding {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.jumbotron > h1 {
+  margin-bottom: 0;
+  margin-top: 0;
+  font-size: 23px;
+}
+
+.jumbotron > p {
+  font-size: 15px;
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+
+.inline-radio-form-group {
+  margin-bottom: 30px;
+}
+
+.nostyle {
+  all: inherit;
+}
+
+.img-uploading {
+  font-size: 23px;
+  padding-bottom: 10px;
+}
+
+footer {
+  margin-top: 20px;
+}
+
+footer > p {
+  font-size: 12px;
+}

@@ -1,0 +1,5 @@
+.venv
+.vagrant/*
+*.pyc
+collected_static/*
+settings_secret.sh
