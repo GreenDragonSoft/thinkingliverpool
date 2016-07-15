@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'django_nose',
+
+    'autoslug',
     'storages',
     'rest_framework',
     'widget_tweaks',
