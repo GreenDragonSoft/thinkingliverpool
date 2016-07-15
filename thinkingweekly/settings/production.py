@@ -35,35 +35,15 @@ LOGGING = {
         },
     },
     'handlers': {
-        'debug_file': {
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(LOG_DIR, 'debug.log'),
-            'maxBytes': 1024 * 1024 * 20,
-            'backupCount': 5,
+        'console': {
+            'class': 'logging.StreamHandler',
             'formatter': 'verbose',
-        },
-        'info_file': {
-            'level': 'INFO',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(LOG_DIR, 'info.log'),
-            'maxBytes': 1024 * 1024 * 20,
-            'backupCount': 5,
-            'formatter': 'verbose',
-        },
-        'warning_file': {
-            'level': 'WARN',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(LOG_DIR, 'warning.log'),
-            'maxBytes': 1024 * 1024 * 20,
-            'backupCount': 5,
-            'formatter': 'verbose',
-        },
+        }
     },
     'loggers': {
         '': {
-            'handlers': ['debug_file', 'info_file', 'warning_file'],
-            'level': 'INFO',
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
             'propagate': True,
         },
     },
