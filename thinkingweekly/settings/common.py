@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_s3_storage',
     'django_extensions',
     'django_nose',
 
@@ -159,22 +160,45 @@ if os.environ.get('USE_FILESYSTEM_STORAGE', 'false') == 'true':
 
 else:
     try:
-        AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
-        AWS_S3_ACCESS_KEY_ID = os.environ['AWS_S3_ACCESS_KEY_ID']
-        AWS_S3_SECRET_ACCESS_KEY = os.environ['AWS_S3_SECRET_ACCESS_KEY']
+        AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+        AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+        AWS_S3_BUCKET_NAME = os.environ['AWS_S3_BUCKET_NAME_UPLOADS']
+        AWS_S3_BUCKET_NAME_STATIC = os.environ['AWS_S3_BUCKET_NAME_STATIC']
+
     except KeyError:
         raise ImproperlyConfigured(
             'In production mode, Django reads environment variables '
             'specifying the S3 bucket & credentials used for media uploads. '
-            'Required keys are: AWS_STORAGE_BUCKET_NAME, '
-            'AWS_S3_ACCESS_KEY_ID, AWS_S3_SECRET_ACCESS_KEY. In development, '
-            'you can use local storage: `export USE_FILESYSTEM_STORAGE=true`')
+            'Required keys are: '
+            'AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, '
+            'AWS_S3_BUCKET_NAME_STATIC, AWS_S3_BUCKET_NAME_UPLOADS. '
+            'In development, you can use local storage: '
+            '`export USE_FILESYSTEM_STORAGE=true`')
 
-    STATICFILES_LOCATION = 'static'
-    STATICFILES_STORAGE = 'thinkingweekly.custom_storages.StaticStorage'
+    # See https://github.com/etianen/django-s3-storage
 
-    MEDIAFILES_LOCATION = 'uploads'
-    DEFAULT_FILE_STORAGE = 'thinkingweekly.custom_storages.MediaStorage'
+    # The region to connect to when storing files.
+    AWS_REGION = "eu-west-1"
+
+    # Uploads (media)
+    DEFAULT_FILE_STORAGE = 'django_s3_storage.storage.S3Storage'
+    AWS_S3_CALLING_FORMAT = "boto.s3.connection.OrdinaryCallingFormat"
+    AWS_S3_KEY_PREFIX = "uploads"
+    AWS_S3_BUCKET_AUTH = True  # querystring auth
+    AWS_S3_MAX_AGE_SECONDS = 10 * 60
+    AWS_S3_PUBLIC_URL = ""
+    AWS_S3_REDUCED_REDUNDANCY = False
+    AWS_S3_METADATA = {}
+
+    # Static
+    STATICFILES_STORAGE = 'django_s3_storage.storage.StaticS3Storage'
+    AWS_S3_CALLING_FORMAT_STATIC = "boto.s3.connection.OrdinaryCallingFormat"
+    AWS_S3_BUCKET_AUTH_STATIC = False  # querystring authentication
+    AWS_S3_KEY_PREFIX_STATIC = "static"
+    AWS_S3_MAX_AGE_SECONDS_STATIC = 60 * 60 * 24 * 365  # 1 year.
+    AWS_S3_PUBLIC_URL_STATIC = ""
+    AWS_S3_REDUCED_REDUNDANCY_STATIC = False
+    AWS_S3_METADATA_STATIC = {}
 
     FILESYSTEM_BASED_MEDIA = False  # Used in urls.py
 
