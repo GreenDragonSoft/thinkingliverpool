@@ -17,7 +17,8 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES = {'default': db_from_env}
 
 ALLOWED_HOSTS = [
-    '*'  # FIXME: Don't run a real service like this!
+    'www.thinkingliverpool.com',
+    'thinkingweekly.herokuapp.com',
 ]
 
 LOG_DIR = '/var/log/thinkingweekly'
