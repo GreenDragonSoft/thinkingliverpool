@@ -8,7 +8,7 @@ django-extensions==1.6.1
 django-model-utils==1.4.0
 django-nose==1.4.3
 djangorestframework==3.3.3
-django-storages==1.4
+django-s3-storage==0.9.10
 django-versatileimagefield==1.4
 django-widget-tweaks==1.4.1
 dj-database-url==0.4.0
