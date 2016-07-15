@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django_nose',
 
     'autoslug',
-    'storages',
     'rest_framework',
     'widget_tweaks',
     'versatileimagefield',
