@@ -10,7 +10,7 @@ class Venue(models.Model):
     twitter_handle = models.CharField(
         null=True,
         blank=True,
-        max_length=15,
+        max_length=16,
         help_text='With the leading @, eg @LEAFonBoldSt')
 
     def __str__(self):
@@ -25,7 +25,7 @@ class Organiser(models.Model):
     twitter_handle = models.CharField(
         null=True,
         blank=True,
-        max_length=15,
+        max_length=16,
         help_text='With the leading @, eg @newsfromnowhere')
 
     def __str__(self):
@@ -81,7 +81,7 @@ class Event(models.Model):
         max_length=30,
         null=True,
         blank=True,
-        default="",
+        default=None,
     )
 
     description = models.TextField()
