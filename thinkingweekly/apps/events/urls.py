@@ -8,4 +8,8 @@ urlpatterns = [
     url(r'^e/(?P<slug>.+)/(?P<pk>\d+)/$',
         views.EventDetail.as_view(),
         name='events.event_detail'),
+
+    url(r'^u/(?P<date>\d{4}-\d{2}-\d{2})/$',
+        views.WeeklyUpdate.as_view(),
+        name='events.weekly_update_detail'),
 ]
