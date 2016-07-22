@@ -76,3 +76,7 @@ class WeeklyUpdate(ListView):
         return datetime.datetime.strptime(
            date_string, '%Y-%m-%d'
         ).date()
+
+
+class WeeklyUpdateEmailPreview(WeeklyUpdate):
+    template_name = "events/email/weekly_update.html"

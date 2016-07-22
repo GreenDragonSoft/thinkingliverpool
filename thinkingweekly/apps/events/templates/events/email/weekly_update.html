@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+  </head>
+
+  <body style='font-family: "Trebuchet MS",sans-serif; background-color: #eeeeee'>
+
+    <div style="width: 728px; margin-left: auto; margin-right: auto; background-color: #ffffff; padding: 10px">
+    <div style="font-size: 120%">
+      <p>Dear *|FNAME|*,</p>
+
+      <p>
+      Here's your weekly update of talks, debates and interesting events.
+      </p>
+
+      <p>
+      Thanks,<br />
+
+      Paul
+      </p>
+    </div>
+
+    {% for event in events %}
+    <h2>
+      <a style="color: #428bca; text-decoration: none" href="{{ event.external_url }}" target="_new">
+        {{ event.title }}
+      </a>
+    </h2>
+
+    <h4>{{ event.starts_at|date }}  {{ event.starts_at|time:"H:i" }}
+      <a href="http://maps.google.co.uk/maps?q={{ event.venue.address|urlencode }}" title="{{ event.full_location }}" target="_new">
+        {{ event.venue.name }}</a></i></h4>
+    <p class="lead">{{ event.description }}</p>
+    <hr />
+    {% endfor %}
+
+
+    <footer>
+      <p>
+        Also on <a href="https://twitter.com/ThinkingLiv">Twitter</a> and online
+        at <a href="http://www.thinkingliverpool.com">www.thinkingliverpool.com</a>
+      </p>
+      <p>
+        Thinking Liverpool is a project by Paul Furley, made possible by lots
+        of hard work by Jenny.
+      </p>
+    </footer>
+
+    </div>
+  </body>
+
+</html>
