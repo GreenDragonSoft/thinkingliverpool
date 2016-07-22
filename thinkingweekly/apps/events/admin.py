@@ -10,6 +10,7 @@ class VenueAdmin(admin.ModelAdmin):
         'name',
         'twitter_handle',
         'address',
+        'website',
     )
 
     readonly_fields = (
@@ -24,6 +25,7 @@ class OrganiserAdmin(admin.ModelAdmin):
     list_display = (
         'name',
         'twitter_handle',
+        'website',
     )
 
 
