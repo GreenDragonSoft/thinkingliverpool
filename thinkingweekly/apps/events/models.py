@@ -1,9 +1,25 @@
+import re
+
 from django.db import models
 from autoslug import AutoSlugField
 
 
+def calculate_venue_sort_name(venue_name):
+    """
+    Return venue name without certain leading words.
+    We want eg "Liverpool Central Library" to sort next to "Central Library"
+    """
+    return re.sub(r'^((The|Liverpool)\s*)', '', venue_name)
+
+
 class Venue(models.Model):
     name = models.CharField(max_length=50)
+
+    sort_name = models.CharField(
+        max_length=50,
+        default='',
+        editable=False,
+    )
 
     address = models.CharField(max_length=200)
 
@@ -12,6 +28,13 @@ class Venue(models.Model):
         blank=True,
         max_length=16,
         help_text='With the leading @, eg @LEAFonBoldSt')
+
+    def save(self, *args, **kwargs):
+        self.sort_name = self._calculate_sort_name()
+        super(Venue, self).save(*args, **kwargs)
+
+    def _calculate_sort_name(self):
+        return calculate_venue_sort_name(self.name)
 
     def __str__(self):
         if self.twitter_handle:

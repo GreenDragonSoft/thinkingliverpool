@@ -12,6 +12,12 @@ class VenueAdmin(admin.ModelAdmin):
         'address',
     )
 
+    readonly_fields = (
+        'sort_name',
+    )
+
+    ordering = ['sort_name']
+
 
 @admin.register(Organiser)
 class OrganiserAdmin(admin.ModelAdmin):
