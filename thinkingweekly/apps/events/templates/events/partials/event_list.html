@@ -1,0 +1,26 @@
+    {% for event in events %}
+    <div class="content-section-a">
+
+      <div class="container">
+
+        <div class="row">
+          <div>
+            <hr class="section-heading-spacer">
+            <div class="clearfix"></div>
+            <h2 class="section-heading">
+              <a href="{{ event.external_url }}" target="_new">
+                 {{ event.title }}
+              </a>
+            </h2>
+            <h4>{{ event.starts_at }},
+              <a href="http://maps.google.co.uk/maps?q={{ event.venue.address|urlencode }}"
+                 title="{{ event.venue.address }}" target="_new">
+                {{ event.venue.name }}</a></i></h4>
+              <p class="lead">{{ event.description }}</p>
+            </div>
+          </div>
+
+      </div><!-- /.container -->
+
+    </div><!-- /.content-section-a -->
+    {% endfor %}
