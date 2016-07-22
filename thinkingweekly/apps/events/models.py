@@ -1,6 +1,7 @@
 import re
 
 from django.db import models
+from django.core.urlresolvers import reverse
 from autoslug import AutoSlugField
 
 
@@ -115,6 +116,12 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse(
+            'events.event_detail',
+            kwargs={'pk': self.id, 'slug': self.slug}
+        )
 
     def twitter_handles(self):
         handles = set([
