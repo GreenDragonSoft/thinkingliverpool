@@ -146,6 +146,8 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+MAILCHIMP_EMAIL_BEAMER = os.environ['MAILCHIMP_EMAIL_BEAMER']
+
 
 if os.environ.get('USE_FILESYSTEM_STORAGE', 'false') == 'true':
     MEDIA_ROOT = abspath(pjoin(BASE_DIR, 'uploads'))
@@ -208,7 +210,7 @@ if os.environ.get('DISABLE_OUTBOUND_EMAIL', 'false') == 'false':
 
     ADMINS = [('Admin', os.environ['ADMIN_EMAIL'])]
 
-    DEFAULT_FROM_EMAIL = 'RefundMyTrain <noreply@thinkingweekly.com>'
+    DEFAULT_FROM_EMAIL = 'Thinking Liverpool <noreply@thinkingweekly.com>'
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
     EMAIL_HOST = os.environ['EMAIL_HOST']
