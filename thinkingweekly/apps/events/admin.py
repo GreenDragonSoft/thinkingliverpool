@@ -13,6 +13,13 @@ class VenueAdmin(admin.ModelAdmin):
         'website',
     )
 
+    search_fields = (
+        'name',
+        'twitter_handle',
+        'address',
+        'website',
+    )
+
     readonly_fields = (
         'sort_name',
     )
@@ -23,6 +30,12 @@ class VenueAdmin(admin.ModelAdmin):
 @admin.register(Organiser)
 class OrganiserAdmin(admin.ModelAdmin):
     list_display = (
+        'name',
+        'twitter_handle',
+        'website',
+    )
+
+    search_fields = (
         'name',
         'twitter_handle',
         'website',
