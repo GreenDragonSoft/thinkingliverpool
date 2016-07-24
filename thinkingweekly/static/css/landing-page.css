@@ -104,6 +104,15 @@ h6 {
     font-size: 36px;
 }
 
+.content-section-a a {
+    color: inherit;
+}
+
+.content-section-a a:hover {
+    text-decoration: underline;
+}
+
+
 .content-section-b {
     padding: 0;
     border-top: 1px solid #e7e7e7;
