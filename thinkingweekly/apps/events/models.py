@@ -71,7 +71,7 @@ class Organiser(models.Model):
 
 class Event(models.Model):
     class Meta:
-        ordering = ['-starts_at']
+        ordering = ['starts_at']
 
     title = models.CharField(max_length=100)
 
