@@ -6,9 +6,19 @@ test:
 runserver:
 	./manage.py runserver 0.0.0.0:8000
 
-.PHONY: backup
-backup:
-	pg_dumpall > "backup_$(shell date --rfc-3339=seconds).sql"
+.PHONY: dumpdb
+dumpdb: latest.sql
+       @echo 'Now do vagrant ssh, then: dropdb vagrant && createdb vagrant && psql < latest.sql'
+
+latest.dump:
+	heroku pg:backups capture
+	curl -o latest.dump `heroku pg:backups public-url`
+
+latest.sql: latest.dump
+	# convert dump file to SQL
+	pg_restore --no-acl --no-owner -f latest.sql latest.dump
+
+
 
 .PHONY: tunnel
 tunnel:
