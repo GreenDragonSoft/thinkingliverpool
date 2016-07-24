@@ -99,17 +99,19 @@ class Event(models.Model):
         )
     )
 
+    venue = models.ForeignKey('Venue')
+
     organiser = models.ForeignKey(
         'Organiser',
         null=True,
+        blank=True,
         help_text=(
-            'The group or organisations (if any) that organised this event. '
-            'This may be the same as the venue, eg @LivUni and '
-            '@newsfromnowhere or it may be separate, like how @Igniteliv '
-            'is the organisation and they typically host in LEAF tea shop'
+            '*IF different from the Venue, the group or organisations (if '
+            'any) that organised this event, for example @Igniteliv '
+            'is the organisation beind Ignite, which is usually hosted in '
+            'LEAF tea shop'
         )
     )
-    venue = models.ForeignKey('Venue')
 
     extra_twitter_handle = models.CharField(
         max_length=30,
