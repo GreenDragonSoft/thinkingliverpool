@@ -30,7 +30,10 @@ class Venue(models.Model):
         max_length=16,
         help_text='With the leading @, eg @LEAFonBoldSt')
 
-    website = models.URLField(null=True)
+    website = models.URLField(
+        null=True,
+        blank=True,
+    )
 
     def save(self, *args, **kwargs):
         self.sort_name = self._calculate_sort_name()
@@ -54,7 +57,10 @@ class Organiser(models.Model):
         max_length=16,
         help_text='With the leading @, eg @newsfromnowhere')
 
-    website = models.URLField(null=True)
+    website = models.URLField(
+        null=True,
+        blank=True,
+    )
 
     def __str__(self):
         if self.twitter_handle:
