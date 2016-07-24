@@ -37,11 +37,12 @@ h6 {
 
 .intro-message {
     position: relative;
-    padding-top: 20%;
-    padding-bottom: 20%;
+    padding-top: 15%;
+    padding-bottom: 15%;
 }
 
 .intro-message > h1 {
+    font-family: "Cardo", serif;
     margin: 0;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
     font-size: 5em;
@@ -53,17 +54,18 @@ h6 {
     border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
-.intro-message > h3 {
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
-}
-
 @media(max-width:767px) {
     .intro-message {
         padding-bottom: 15%;
     }
 
     .intro-message > h1 {
-        font-size: 3em;
+        font-size: 4.5em;
+    }
+
+    .intro-message > h3,
+    .intro-message > h4 {
+        font-size: 1.2em;
     }
 
     ul.intro-social-buttons > li {
@@ -93,9 +95,23 @@ h6 {
 }
 
 .content-section-a {
-    padding: 0;
+    padding: 0 10px 0 10px;
     background-color: #f8f8f8;
 }
+
+.content-section-a h2 {
+    font-family: "Cardo", serif;
+    font-size: 36px;
+}
+
+.content-section-a a {
+    color: inherit;
+}
+
+.content-section-a a:hover {
+    text-decoration: underline;
+}
+
 
 .content-section-b {
     padding: 0;
