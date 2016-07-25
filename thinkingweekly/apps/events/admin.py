@@ -41,6 +41,8 @@ class OrganiserAdmin(admin.ModelAdmin):
         'website',
     )
 
+    ordering = ['name']
+
 
 class PastEventsFilter(admin.SimpleListFilter):
     title = 'past events'
