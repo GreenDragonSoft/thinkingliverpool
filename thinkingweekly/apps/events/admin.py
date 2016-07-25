@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils import timezone
 
-from .models import Venue, Event, Organiser
+from .models import Venue, Event, Organiser, Update
 
 
 @admin.register(Venue)
@@ -92,4 +92,12 @@ class EventAdmin(admin.ModelAdmin):
     search_fields = (
         'title',
         'description',
+    )
+
+
+@admin.register(Update)
+class UpdateAdmin(admin.ModelAdmin):
+    list_display = (
+        'start_date',
+        'number_of_events',
     )

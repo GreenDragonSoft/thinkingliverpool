@@ -1,0 +1,7 @@
+{% extends "thinkingweekly/base.html" %}
+
+{% block content %}
+
+    {% include "events/partials/event_list.html" with events=update.events only %}
+
+{% endblock %}
