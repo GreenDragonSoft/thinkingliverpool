@@ -124,6 +124,10 @@ class Event(models.Model):
 
     description = models.TextField()
 
+    have_posted_facebook = models.BooleanField(default=False)
+
+    have_posted_twitter = models.BooleanField(default=False)
+
     def __str__(self):
         return self.title
 
