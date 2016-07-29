@@ -9,8 +9,14 @@ import datetime
 import logging
 
 from django.utils import timezone
+from django.db import transaction
+from django.conf import settings
 
-from thinkingweekly.apps.events.models import Update
+from django.core.mail import mail_admins
+
+import tweepy
+
+from thinkingweekly.apps.events.models import Event, Update
 
 LOG = logging.getLogger(__name__)
 
@@ -52,7 +58,28 @@ def _ensure_update_exists(start_monday):
 
 
 def post_events_twitter():
-    pass
+    if not _am_inside_event_post_time_window():
+        return
+
+    for event in _find_events_to_post_to_twitter():
+        _attempt_post_and_record_to_twitter(event)
+
+
+def _attempt_post_and_record_to_twitter(event):
+    try:
+        with transaction.atomic():
+            _post_event_to_twitter(event)
+            _record_posted_event_to_twitter(event)
+
+    except Exception as e:
+        LOG.exception(e)
+
+        # TODO: don't mail admins from here, make an error logger which
+        #       automatically emails them for this log level.
+        mail_admins(
+            'Failed to send tweet for {}'.format(event),
+            repr(e),
+            fail_silently=True)
 
 
 def post_events_facebook():
@@ -65,3 +92,48 @@ def post_update_twitter():
 
 def post_update_facebook():
     pass
+
+
+def _am_inside_event_post_time_window():
+    """
+    We only attempt to tweet out events between 1pm and 5pm.
+    """
+    LOG.info("Time: {}".format(timezone.now()))
+    return 13 <= timezone.now().hour <= 18
+
+
+def _find_events_to_post_to_twitter():
+    """
+    Return events which
+    1. havent been posted
+    2. start tomorrow
+    """
+    LOG.info("Looking for events")
+    tomorrow = timezone.now().date() + datetime.timedelta(days=1)
+
+    return Event.objects.filter(
+        have_posted_twitter=False,
+        starts_at__date=tomorrow,
+    )
+
+
+def _post_event_to_twitter(event):
+    status = event.create_tweet()
+
+    LOG.info("Posting to Twitter: {}: '{}'".format(event, status))
+
+    api = get_authenticated_twitter_api()
+    api.update_status(status=status)
+
+
+def get_authenticated_twitter_api():
+    auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY,
+                               settings.TWITTER_CONSUMER_SECRET)
+    auth.set_access_token(settings.TWITTER_ACCESS_TOKEN,
+                          settings.TWITTER_ACCESS_TOKEN_SECRET)
+    return tweepy.API(auth)
+
+
+def _record_posted_event_to_twitter(event):
+    event.have_posted_twitter = True
+    event.save()

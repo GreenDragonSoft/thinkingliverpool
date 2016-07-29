@@ -216,3 +216,10 @@ if os.environ.get('DISABLE_OUTBOUND_EMAIL', 'false') == 'false':
     EMAIL_HOST = os.environ['EMAIL_HOST']
     EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
     EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+
+
+if os.environ.get('DISABLE_TWITTER', 'false') == 'false':
+    TWITTER_CONSUMER_KEY = os.environ['TWITTER_CONSUMER_KEY']
+    TWITTER_CONSUMER_SECRET = os.environ['TWITTER_CONSUMER_SECRET']
+    TWITTER_ACCESS_TOKEN = os.environ['TWITTER_ACCESS_TOKEN']
+    TWITTER_ACCESS_TOKEN_SECRET = os.environ['TWITTER_ACCESS_TOKEN_SECRET']
