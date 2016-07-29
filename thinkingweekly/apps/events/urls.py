@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from . import views
-from .feeds import WeeklyUpdateFeed
+# from .feeds import UpdateFeed
+
+DATE_PATTERN = '\d{4}-\d{2}-\d{2}'
 
 urlpatterns = [
     url(r'^$',
@@ -10,13 +12,9 @@ urlpatterns = [
         views.EventDetail.as_view(),
         name='events.event_detail'),
 
-    url(r'^u/(?P<date>\d{4}-\d{2}-\d{2})/$',
-        views.WeeklyUpdate.as_view(),
-        name='events.weekly_update'),
+    url(r'^u/(?P<date>' + DATE_PATTERN + ')/email-preview/$',
+        views.UpdateEmailPreview.as_view(),
+        name='events.update_email_preview'),
 
-    url(r'^u/(?P<date>\d{4}-\d{2}-\d{2})/email-preview/$',
-        views.WeeklyUpdateEmailPreview.as_view(),
-        name='events.weekly_update_email_preview'),
-
-    url(r'feed/rss/$', WeeklyUpdateFeed()),
+    # url(r'feed/rss/$', UpdateFeed()),
 ]

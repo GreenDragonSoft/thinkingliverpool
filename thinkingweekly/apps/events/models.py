@@ -2,6 +2,8 @@ import re
 
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.utils import formats
+
 from autoslug import AutoSlugField
 
 
@@ -143,3 +145,46 @@ class Event(models.Model):
 
     def description_brief(self):
         return self.description[0:50] + '…'
+
+
+class Update(models.Model):
+    class Meta:
+        unique_together = ('start_date', 'end_date')
+        ordering = ('start_date',)
+
+    start_date = models.DateField(
+        primary_key=True
+    )
+
+    end_date = models.DateField()
+
+    have_posted_email = models.BooleanField(
+        # Once we're using the Mailchimp API, this could turn into a
+        # MailchimpCampaign model to record the details, then later track
+        # analytics.
+        default=False
+    )
+
+    have_posted_facebook = models.BooleanField(default=False)
+
+    have_posted_twitter = models.BooleanField(default=False)
+
+    def __str__(self):
+        return 'Update({} to {})'.format(
+            formats.date_format(self.start_date),
+            formats.date_format(self.end_date),
+        )
+
+    @property
+    def events(self):
+        # For now I think it's safe to dynamically generate the list of events
+        # rather than storing them separately against an update.
+
+        return Event.objects.filter(
+            starts_at__gte=self.start_date,
+            starts_at__lt=self.end_date,
+        )
+
+    @property
+    def number_of_events(self):
+        return self.events.count()
