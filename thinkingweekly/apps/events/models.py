@@ -2,7 +2,7 @@ import re
 
 from django.db import models
 from django.core.urlresolvers import reverse
-from django.utils import formats
+from django.utils import formats, timezone
 
 from autoslug import AutoSlugField
 
@@ -134,17 +134,46 @@ class Event(models.Model):
         )
 
     def twitter_handles(self):
-        handles = set([
-            self.extra_twitter_handle,
+        handles = filter(None, [
             self.venue.twitter_handle,
+            self.organiser.twitter_handle if self.organiser else None,
+            self.extra_twitter_handle,
         ])
-        if self.organiser:
-            handles.add(self.organiser.twitter_handle)
 
-        return ' '.sort(handles)
+        def f7(seq):
+            seen = set()
+            return [x for x in seq
+                    if not (x.lower() in seen or seen.add(x.lower()))]
+
+        return ' '.join(f7(handles))
 
     def description_brief(self):
         return self.description[0:50] + '…'
+
+    def create_tweet(self):
+        when = timezone.localtime(self.starts_at).strftime('%a %H:%M')
+        twitters = self.twitter_handles()
+
+        TWEET_LENGTH = 140
+        URL_LENGTH = 23
+
+        available_characters = TWEET_LENGTH - (
+            URL_LENGTH + len(twitters) + len(when) + 3)
+
+        def truncate(string, length):
+            if len(string) > length:
+                return string[0:length-1] + '…'
+            else:
+                return string
+
+        title = truncate(self.title, available_characters)
+
+        return ' '.join(filter(None, [
+            title,
+            when,
+            twitters,
+            'thinkingliverpool.com',
+        ]))
 
 
 class Update(models.Model):
