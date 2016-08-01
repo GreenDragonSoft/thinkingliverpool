@@ -8,7 +8,7 @@ runserver:
 
 .PHONY: dumpdb
 dumpdb: latest.sql
-       @echo 'Now do vagrant ssh, then: dropdb vagrant && createdb vagrant && psql < latest.sql'
+       echo 'Now do vagrant ssh, then: dropdb vagrant && createdb vagrant && psql < latest.sql'
 
 latest.dump:
 	heroku pg:backups capture
