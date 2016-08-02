@@ -101,6 +101,7 @@ class UpdateAdmin(admin.ModelAdmin):
         '__str__',
         'number_of_events',
         'ready_to_post',
+        'have_posted_email',
     )
 
     readonly_fields = (
