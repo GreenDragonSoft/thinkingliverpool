@@ -80,8 +80,8 @@ def post_events_twitter():
 def _attempt_post_and_record_to_twitter(event):
     try:
         with transaction.atomic():
-            _post_event_to_twitter(event)
             _record_posted_event_to_twitter(event)
+            _post_event_to_twitter(event)
 
     except Exception as e:
         LOG.exception(e)
