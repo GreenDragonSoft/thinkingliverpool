@@ -17,6 +17,7 @@ from django.core.mail import mail_admins
 import tweepy
 
 from thinkingweekly.apps.events.models import Event, Update
+from .email_helpers import send_update_by_email
 
 LOG = logging.getLogger(__name__)
 
@@ -25,6 +26,7 @@ __all__ = [
     'create_updates',
     'post_events_twitter',
     'post_events_facebook',
+    'post_update_email',
     'post_update_twitter',
     'post_update_facebook',
 ]
@@ -57,6 +59,16 @@ def _ensure_update_exists(start_monday):
         LOG.info("Created {}".format(update))
 
 
+def post_update_email():
+    if not _am_inside_update_post_time_window():
+        LOG.info('Not inside event post time window')
+        return
+
+    update_to_post = _find_update_to_post_to_email()
+    if update_to_post:
+        _attempt_post_update_to_email_and_record(update_to_post)
+
+
 def post_events_twitter():
     if not _am_inside_event_post_time_window():
         return
@@ -82,6 +94,30 @@ def _attempt_post_and_record_to_twitter(event):
             fail_silently=True)
 
 
+def _attempt_post_update_to_email_and_record(update):
+    LOG.info('Attempting to post update to email')
+    try:
+        with transaction.atomic():
+            # record to database first; it can rollback
+            _record_posted_update_to_email(update)
+            _post_update_to_email(update)
+
+    except Exception as e:
+        LOG.exception(e)
+
+        # TODO: don't mail admins from here, make an error logger which
+        #       automatically emails them for this log level.
+        mail_admins(
+            'Failed to send email for {}'.format(update),
+            repr(e),
+            fail_silently=True)
+
+
+def _post_update_to_email(update):
+    LOG.info('Posting update to email: {}'.format(update))
+    send_update_by_email(update)
+
+
 def post_events_facebook():
     pass
 
@@ -100,6 +136,42 @@ def _am_inside_event_post_time_window():
     """
     LOG.info("Time: {}".format(timezone.now()))
     return 13 <= timezone.now().hour <= 18
+
+
+def _am_inside_update_post_time_window():
+    """
+    We only attempt to post updates in the morning.
+    """
+    LOG.info("Time now: {}".format(timezone.now()))
+    return 8 <= timezone.localtime(timezone.now()).hour <= 11
+
+
+def _find_update_to_post_to_email():
+    """
+    Find updates which
+    1. start from today or yesterday
+    2. are marked as "ready"
+    3. have not already been posted to email
+    """
+
+    now = timezone.now()
+    today = timezone.localtime(now).date()
+    yesterday = timezone.localtime(now - datetime.timedelta(days=1)).date()
+
+    LOG.info('today: {} yesterday: {}'.format(today, yesterday))
+
+    try:
+        update = Update.objects.get(
+            ready_to_post=True,
+            have_posted_email=False,
+            start_date__in=(today, yesterday),
+        )
+    except Update.DoesNotExist:
+        LOG.info('No eligible Updates found.')
+        return None
+
+    if update.events.count() > 0:
+        return update
 
 
 def _find_events_to_post_to_twitter():
@@ -137,3 +209,8 @@ def get_authenticated_twitter_api():
 def _record_posted_event_to_twitter(event):
     event.have_posted_twitter = True
     event.save()
+
+
+def _record_posted_update_to_email(update):
+    update.have_posted_email = True
+    update.save()

@@ -191,6 +191,14 @@ class Update(models.Model):
 
     end_date = models.DateField()
 
+    ready_to_post = models.BooleanField(
+        help_text=(
+            'Enable this to schedule the update to be posted '
+            'automatically (betweem 9am-11am on Monday).'
+        ),
+        default=False,
+    )
+
     have_posted_email = models.BooleanField(
         # Once we're using the Mailchimp API, this could turn into a
         # MailchimpCampaign model to record the details, then later track
