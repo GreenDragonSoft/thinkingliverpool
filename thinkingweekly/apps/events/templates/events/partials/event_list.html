@@ -12,7 +12,7 @@
                  {{ event.title }}
               </a>
             </h2>
-            <h4>{{ event.starts_at }},
+            <h4>{{ event.starts_at|date }},
               <a href="http://maps.google.co.uk/maps?q={{ event.venue.address|urlencode }}"
                  title="{{ event.venue.address }}" target="_new">
                 {{ event.venue.name }}</a></i></h4>
