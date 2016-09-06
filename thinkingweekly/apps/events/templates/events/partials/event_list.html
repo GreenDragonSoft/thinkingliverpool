@@ -16,7 +16,7 @@
               <a href="http://maps.google.co.uk/maps?q={{ event.venue.address|urlencode }}"
                  title="{{ event.venue.address }}" target="_new">
                 {{ event.venue.name }}</a></i></h4>
-              <p class="lead">{{ event.description }}</p>
+               {{ event.description|linebreaks }}
             </div>
           </div>
 
