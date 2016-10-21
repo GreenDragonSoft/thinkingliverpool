@@ -6,7 +6,8 @@ DATE_PATTERN = '\d{4}-\d{2}-\d{2}'
 
 urlpatterns = [
     url(r'^$',
-        views.SiteHome.as_view()),
+        views.SiteHome.as_view(),
+        name='site_home'),
 
     url(r'^e/(?P<slug>.+)/(?P<pk>\d+)/$',
         views.EventDetail.as_view(),
