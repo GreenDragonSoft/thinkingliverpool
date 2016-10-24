@@ -184,3 +184,11 @@ footer {
 p.copyright {
     margin: 15px 0 0;
 }
+
+.navbar-brand {
+  padding-top: 0;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
