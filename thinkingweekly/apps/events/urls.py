@@ -9,6 +9,10 @@ urlpatterns = [
         views.SiteHome.as_view(),
         name='site_home'),
 
+    url(r'^events-in-liverpool/$',
+        views.EventList.as_view(),
+        name='events.event_list'),
+
     url(r'^e/(?P<slug>.+)/(?P<pk>\d+)/$',
         views.EventDetail.as_view(),
         name='events.event_detail'),

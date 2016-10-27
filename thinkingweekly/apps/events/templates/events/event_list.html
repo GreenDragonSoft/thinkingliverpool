@@ -1,0 +1,18 @@
+{% extends "thinkingweekly/base.html" %}
+
+
+{% block content %}
+
+  <div class="container">
+    <h1>Events in Liverpool</h1>
+
+    {% include "events/partials/event_list.html" with events=events only %}
+
+    <p class="more-events-next-week">
+      More events next week...
+    </p>
+
+
+  </div>
+
+{% endblock %}

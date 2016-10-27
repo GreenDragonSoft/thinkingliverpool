@@ -2,6 +2,46 @@
 
 {% block content %}
 
-    {% include "events/partials/event_list.html" with events=events only %}
+  <div class="container">
+    <h1 class="explainer">A Weekly Newsletter of Talks, Debates &amp; Interesting Events</h1>
+
+    {% include "events/partials/subscribe_form.html" %}
+
+    <h2>Interesting events in one place</h2>
+
+    <p>
+      Since moving to the city in 2013, I've been amazed by the number of
+      talks, debates and other interesting events in Liverpool.
+    <p>
+
+    <p>
+      The problem was there seemed to be a hundred different places to look,
+      and I kept hearing about things after they'd already happened.
+    </p>
+
+    <h2>Connecting curious people</h2>
+
+    <p>
+      I started Thinking Liverpool to make it easier to find out about
+      events and to bring together curious people from different walks of life.
+    </p>
+
+    <p>
+      If that sounds helpful, please go ahead and subscribe to my weekly email.
+    </p>
+
+    <p>
+      Cheers,
+    </p>
+
+    <p>
+      Paul
+    </p>
+
+    <p>
+      <a class="oldskool" href="{% url "events.event_list" %}">View upcoming events in Liverpool</a>
+    <p>
+
+</div>
 
 {% endblock %}

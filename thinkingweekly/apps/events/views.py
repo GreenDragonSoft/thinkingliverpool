@@ -1,4 +1,5 @@
 from django.shortcuts import redirect
+from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.utils import timezone
@@ -6,9 +7,13 @@ from django.utils import timezone
 from .models import Event, Update
 
 
-class SiteHome(ListView):
-    model = Event
+class SiteHome(TemplateView):
     template_name = 'events/site_home.html'
+
+
+class EventList(ListView):
+    model = Event
+    template_name = 'events/event_list.html'
     context_object_name = 'events'
     queryset = Event.objects.filter(
         starts_at__gte=timezone.now(),
