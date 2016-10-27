@@ -229,3 +229,9 @@ class Update(models.Model):
     @property
     def number_of_events(self):
         return self.events.count()
+
+    def get_absolute_url(self):
+        return reverse(
+            'events.weekly_update_event_list',
+            kwargs={'date': self.start_date}
+        )

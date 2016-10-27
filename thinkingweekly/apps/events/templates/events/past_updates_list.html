@@ -1,0 +1,35 @@
+{% extends "thinkingweekly/base.html" %}
+
+
+{% block content %}
+
+  <div class="container">
+    <h1>Past event updates</h1>
+
+    <p>
+      Updates are usually published each Monday and cover the following
+      two-week period.
+    </p>
+
+    <div class="past-event-updates">
+
+      {% for update in updates %}
+      <h2>
+        <a href="{{ update.get_absolute_url }}">
+          Fortnight starting {{ update.start_date|date:'jS N Y' }}
+        </a>
+      </h2>
+
+      <ul>
+        {% for event in update.events %}
+        <li>{{ event.title }}</li>
+        {% endfor %}
+      </ul>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+{% endblock %}

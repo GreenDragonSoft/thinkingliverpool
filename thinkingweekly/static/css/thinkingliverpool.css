@@ -21,3 +21,13 @@ p.more-events-next-week {
   font-size: 24px;
   font-style: italic;
 }
+
+p.see-future-events {
+  font-size: 24px;
+}
+
+.past-event-updates > h2 > a {
+  font-size: 24px;
+  color: inherit;
+  text-decoration: underline;
+}
