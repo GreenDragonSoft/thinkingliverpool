@@ -1,0 +1,23 @@
+h1.explainer {
+  font-weight: lighter;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+div.subscribe-form {
+  margin-top: 20px;
+  margin-bottom:  20px;
+}
+
+a.oldskool, div.event a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+p.more-events-next-week {
+  margin-top: 20px;
+  font-size: 24px;
+  font-style: italic;
+}

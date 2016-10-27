@@ -13,7 +13,7 @@ class SiteHome(TemplateView):
 
 class EventList(ListView):
     model = Event
-    template_name = 'events/site_home.html'
+    template_name = 'events/event_list.html'
     context_object_name = 'events'
     queryset = Event.objects.filter(
         starts_at__gte=timezone.now(),
