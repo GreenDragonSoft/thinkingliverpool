@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'django_s3_storage',
     'django_extensions',
     'django_nose',
@@ -70,6 +72,9 @@ MIDDLEWARE_CLASSES = (
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 ROOT_URLCONF = 'thinkingweekly.urls'
+
+# https://docs.djangoproject.com/en/1.10/ref/contrib/sites/#enabling-the-sites-framework
+SITE_ID = 1
 
 TEMPLATES = (
     {
