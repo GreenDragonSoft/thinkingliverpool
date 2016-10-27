@@ -19,16 +19,27 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.views import static
 
+from django.contrib.sitemaps.views import sitemap
+
+from thinkingweekly.apps.events.sitemap import UpdateSitemap
+
+
 # http://www.thinkingliverpool.com                   <-- upcoming events
 # http://www.thinkingliverpool.com/ical              <-- upcoming events (ical)
 #
 # http://www.thinkingliverpool.com/e/ignite-whats-happening-5iwJyIPI/
 # ^^ note that 5iwJyIPI is the created_at 20160714221816 in a new base
 
+sitemaps = {
+    'past_updates': UpdateSitemap,
+}
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
     url(r'^', include('thinkingweekly.apps.events.urls')),
+
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps})
 
     # url(r'^_status/', include('thinkingweekly.apps.status.urls')),
     # url(r'^api/', include('thinkingweekly.apps.api.urls')),
