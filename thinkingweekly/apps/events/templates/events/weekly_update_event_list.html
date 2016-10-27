@@ -4,15 +4,14 @@
 {% block content %}
 
   <div class="container">
-    <h1>Events in Liverpool</h1>
+    <h1>Events {{ update.start_date }} to {{ update.end_date }}</h1>
 
     {% include "events/partials/event_list.html" with events=events only %}
 
     <hr>
-    <p class="more-events-next-week">
-      More events next week...
+    <p class="see-future-events">
+      <a class="oldskool" href="{% url "events.event_list" %}">Show future events</a>
     </p>
-
 
   </div>
 
