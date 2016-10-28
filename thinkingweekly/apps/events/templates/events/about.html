@@ -1,0 +1,69 @@
+{% extends "thinkingweekly/base.html" %}
+{% load static from staticfiles %}
+
+{% block content %}
+
+  <div class="container">
+    <h1 class="explainer">Talks, Debates &amp; Interesting Events</h1>
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <img class="img-responsive img-rounded" src="{% static "img/events-in-liverpool.jpg" %}">
+      </div>
+
+      <div class="col-md-8">
+        <h2>Interesting events in one place</h2>
+
+        <p>
+          Since moving to the city in 2013, I've been amazed by the number of
+          talks, debates and other interesting events in Liverpool.
+        <p>
+
+        <p>
+          The problem was there seemed to be a hundred different places to look,
+          and I kept hearing about things after they'd already happened.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-8 col-xs-12">
+
+        <h2>Connecting curious people</h2>
+
+        <p>
+          I started Thinking Liverpool to make it easier to find out about
+          events and to bring together curious people from different walks of life.
+        </p>
+
+        <p>
+          Take a look at <a class="oldskool" href="{% url "events.past_updates" %}">past updates</a>
+          then please go ahead and subscribe to my weekly email.
+        </p>
+
+        <p>
+          Cheers,
+        </p>
+
+        <p>
+          Paul
+        </p>
+      </div>
+
+      <div class="col-md-4">
+        <img class="img-responsive img-rounded" src="{% static "img/connecting-curious-people.jpg" %}">
+      </div>
+
+    </div>
+
+    <hr>
+    <p>
+      <a class="oldskool" href="{% url "events.event_list" %}">View upcoming events in Liverpool</a>
+    <p>
+
+</div>
+
+{% endblock %}

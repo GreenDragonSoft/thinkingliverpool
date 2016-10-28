@@ -11,6 +11,10 @@ class SiteHome(TemplateView):
     template_name = 'events/site_home.html'
 
 
+class About(TemplateView):
+    template_name = 'events/about.html'
+
+
 class EventList(ListView):
     model = Event
     template_name = 'events/event_list.html'
