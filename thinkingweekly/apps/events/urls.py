@@ -9,6 +9,10 @@ urlpatterns = [
         views.SiteHome.as_view(),
         name='site_home'),
 
+    url(r'^about/$',
+        views.About.as_view(),
+        name='events.about'),
+
     url(r'^events-in-liverpool/$',
         views.EventList.as_view(),
         name='events.event_list'),

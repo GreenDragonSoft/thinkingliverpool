@@ -10,6 +10,25 @@ from .models import Event, Update
 class SiteHome(TemplateView):
     template_name = 'events/site_home.html'
 
+    def get_context_data(self):
+        return {
+            'next_event': self._get_next_event()
+        }
+
+    def _get_next_event(self):
+        upcoming_events = Event.objects.filter(
+            starts_at__gte=timezone.now(),
+        ).order_by('-starts_at')
+
+        if upcoming_events.count():
+            return upcoming_events[1]
+        else:
+            return None
+
+
+class About(TemplateView):
+    template_name = 'events/about.html'
+
 
 class EventList(ListView):
     model = Event
