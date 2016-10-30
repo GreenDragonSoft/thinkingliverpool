@@ -1,48 +1,158 @@
 {% extends "thinkingweekly/base.html" %}
+{% load static from staticfiles %}
 
 {% block content %}
 
+  <div class="container-fluid site-home-banner">
+    <div class="container">
+
+      <h1 class="explainer">Talks, Debates &amp; Interesting Events</h1>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="jumbotron">
+            <h2>Sign up for a hand-picked, weekly update</h2>
+            {% include "events/partials/subscribe_form.html" %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <div class="container">
-    <h1 class="explainer">A Weekly Newsletter of Talks, Debates &amp; Interesting Events</h1>
+    <section class="main-event">
 
-    {% include "events/partials/subscribe_form.html" %}
+    <h2>Next event...</h2>
 
-    <h2>Interesting events in one place</h2>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="well">
+            <h3>{{ next_event.title }}</h3>
+            <h4>{{ next_event.starts_at|date }} at {{ next_event.starts_at|time }}</h4>
+          </div>
 
-    <p>
-      Since moving to the city in 2013, I've been amazed by the number of
-      talks, debates and other interesting events in Liverpool.
-    <p>
+        </div>
+      </div>
 
-    <p>
-      The problem was there seemed to be a hundred different places to look,
-      and I kept hearing about things after they'd already happened.
-    </p>
+      <p class="see-future-events">
+        <a class="btn btn-default" href="{% url "events.event_list" %}">
+          See more events
+        </a>
+      </p>
 
-    <h2>Connecting curious people</h2>
+    </section>
 
-    <p>
-      I started Thinking Liverpool to make it easier to find out about
-      events and to bring together curious people from different walks of life.
-    </p>
+    <hr>
 
-    <p>
-      Take a look at <a class="oldskool" href="{% url "events.past_updates" %}">past updates</a>
-      then please go ahead and subscribe to my weekly email.
-    </p>
 
-    <p>
-      Cheers,
-    </p>
+    <!--
+    <section>
+      <h2>Week Highlights</h2>
+      <div class="row">
 
-    <p>
-      Paul
-    </p>
+        <div class="col-xs-6 col-md-6">
+          <a href="#" class="thumbnail">
+            <img src="http://placehold.it/400x224" alt="an image">
+            Reclaiming The City: From Consultation to Collaboration
+          </a>
+        </div>
 
-    <p>
-      <a class="oldskool" href="{% url "events.event_list" %}">View upcoming events in Liverpool</a>
-    <p>
+        <div class="col-xs-6 col-md-6">
+          <a href="#" class="thumbnail">
+            <img src="http://placehold.it/400x224" alt="an image">
+            Ignite Liverpool - Inspiring Liverpool
+          </a>
+        </div>
 
-</div>
+        <div class="col-xs-12 col-md-12">
+          <p>
+            <a class="oldskool" href="{% url "events.event_list" %}">See more</a>
+          <p>
+        </div>
+
+      </div>
+    </section>
+    -->
+
+    <!--
+    <section>
+
+      <h2>Explore themes</h2>
+
+      <div class="row">
+
+        <div class="col-xs-6 col-md-6">
+          <a href="#" class="thumbnail">
+            <img src="http://placehold.it/400x224" alt="an image">
+             Science
+          </a>
+        </div>
+
+        <div class="col-xs-6 col-md-6">
+          <a href="#" class="thumbnail">
+            <img src="http://placehold.it/400x224" alt="an image">
+            Society
+          </a>
+        </div>
+
+        <div class="col-xs-6 col-md-6">
+          <a href="#" class="thumbnail">
+            <img src="http://placehold.it/400x224" alt="an image">
+            History
+          </a>
+        </div>
+
+        <div class="col-xs-6 col-md-6">
+          <a href="#" class="thumbnail">
+            <img src="http://placehold.it/400x224" alt="an image">
+            Community
+          </a>
+        </div>
+
+      </div>
+    </section>
+    -->
+
+    <section>
+      <h2>Popular venues</h2>
+
+      <div class="row">
+
+        <div class="col-xs-12 col-md-6">
+          <div class="venue-image">
+            <img class="img-responsive" src="{% static "img/mersey-maritime-museum.jpg" %}" alt="Mersey Maritime Museum">
+            <h3>Maritime Museum</h3>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+          <div class="venue-image">
+            <img class="img-responsive" src="{% static "img/events-in-bluecoat-liverpool.jpg" %}" alt="Bluecoat">
+            <h3>Bluecoat</h3>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+          <div class="venue-image">
+            <img class="img-responsive" src="{% static "img/events-in-tate-liverpool.jpg" %}" alt="Tate Liverpool">
+            <h3>Tate Liverpool</h3>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+          <div class="venue-image">
+            <img class="img-responsive" src="{% static "img/events-in-liverpool-central-library.jpg" %}" alt="Liverpool Central Library">
+            <h3>Central Library</h3>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+
+    <hr>
+
+  </div>
 
 {% endblock %}
