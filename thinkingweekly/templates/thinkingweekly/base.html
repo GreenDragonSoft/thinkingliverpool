@@ -107,6 +107,20 @@
     </footer>
     <script src="{% static "js/jquery-3.1.1.slim.js" %}"></script>
     <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/webfont-1.5.18.js" %}"></script>
+
+    <script>
+     WebFont.load({
+        google: {
+          families: [
+            'Lato:300,400,700,300italic,400italic,700italic',
+            'Cardo:700',
+            'Raleway:400,700'
+          ]
+        }
+      });
+    </script>
+
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
