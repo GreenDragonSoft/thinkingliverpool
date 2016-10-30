@@ -3,3 +3,5 @@
 *.pyc
 collected_static/*
 settings_secret.sh
+latest.dump
+latest.sql
