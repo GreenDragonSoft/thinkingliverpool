@@ -18,10 +18,10 @@ class SiteHome(TemplateView):
     def _get_next_event(self):
         upcoming_events = Event.objects.filter(
             starts_at__gte=timezone.now(),
-        ).order_by('-starts_at')
+        ).order_by('starts_at')
 
         if upcoming_events.count():
-            return upcoming_events[1]
+            return upcoming_events[0]
         else:
             return None
 
