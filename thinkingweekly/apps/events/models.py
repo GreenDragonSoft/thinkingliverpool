@@ -3,6 +3,7 @@ import re
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils import formats, timezone
+from django.utils.http import urlquote_plus
 
 from autoslug import AutoSlugField
 
@@ -46,6 +47,12 @@ class Venue(models.Model):
         null=True,
         blank=True,
     )
+
+    @property
+    def map_url(self):
+        return 'http://maps.google.co.uk/maps?q={}'.format(
+            urlquote_plus(self.address)
+        )
 
     def save(self, *args, **kwargs):
         self.sort_name = self._calculate_sort_name()
