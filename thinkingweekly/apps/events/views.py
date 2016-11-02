@@ -4,7 +4,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.utils import timezone
 
-from .models import Event, Update
+from .models import Event, Update, Venue
 
 
 class SiteHome(TemplateView):
@@ -51,6 +51,25 @@ class CanonicalDetailViewMixin():
 
 class EventDetail(CanonicalDetailViewMixin, DetailView):
     model = Event
+
+
+class VenueEventList(DetailView):
+    model = Venue
+    context_object_name = 'venue'
+    template_name = "events/venue_event_list.html"
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super(VenueEventList, self).get_context_data(
+            *args, **kwargs)
+
+        ctx['past_events'] = self.object.events.filter(
+            starts_at__lte=timezone.now()
+        ).order_by('-starts_at')
+
+        ctx['future_events'] = self.object.events.filter(
+            starts_at__gte=timezone.now()
+        ).order_by('starts_at')
+        return ctx
 
 
 class WeeklyUpdateEventList(DetailView):

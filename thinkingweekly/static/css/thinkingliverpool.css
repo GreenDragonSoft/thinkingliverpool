@@ -56,6 +56,7 @@ p.see-future-events {
   padding-top: 5px;
 }
 
+/* Site home: venue image */
 .venue-image {
   position: relative;
   padding-bottom: 20px;
@@ -74,4 +75,21 @@ p.see-future-events {
   .venue-image {
     margin-bottom: 20px;
   }
+}
+
+/* Venue information page */
+
+section.venue-information {
+  margin-bottom: 20px;
+}
+
+span.venue-information-snippet a {
+  margin-left: 5px;
+}
+
+span.venue-information-snippet i {
+  /* When two snippets are on the same line, shunt the right one to the
+   * right a bit.
+   */
+  margin-right: 10px;
 }
