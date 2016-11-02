@@ -8,6 +8,7 @@ from .models import Venue, Event, Organiser, Update
 class VenueAdmin(admin.ModelAdmin):
     list_display = (
         'name',
+        'slug',
         'twitter_handle',
         'address',
         'website',

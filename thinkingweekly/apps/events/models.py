@@ -3,6 +3,7 @@ import re
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils import formats, timezone
+from django.utils.http import urlquote_plus
 
 from autoslug import AutoSlugField
 
@@ -24,6 +25,16 @@ class Venue(models.Model):
         editable=False,
     )
 
+    slug = models.SlugField(
+        default=None,
+        null=True,
+        blank=True,
+        help_text=(
+            "Add this to give the venue its own web page. Add with care, "
+            "since it shouldn't be changed after it's set."
+        )
+    )
+
     address = models.CharField(max_length=200)
 
     twitter_handle = models.CharField(
@@ -36,6 +47,19 @@ class Venue(models.Model):
         null=True,
         blank=True,
     )
+
+    @property
+    def twitter_url(self):
+        if self.twitter_handle:
+            return 'https://twitter.com/{}'.format(
+                self.twitter_handle.lstrip('@')
+            )
+
+    @property
+    def map_url(self):
+        return 'http://maps.google.co.uk/maps?q={}'.format(
+            urlquote_plus(self.address)
+        )
 
     def save(self, *args, **kwargs):
         self.sort_name = self._calculate_sort_name()
@@ -101,7 +125,7 @@ class Event(models.Model):
         )
     )
 
-    venue = models.ForeignKey('Venue')
+    venue = models.ForeignKey('Venue', related_name='events')
 
     organiser = models.ForeignKey(
         'Organiser',

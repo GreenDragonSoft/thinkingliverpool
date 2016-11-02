@@ -10,12 +10,14 @@
     </h2>
 
     <h4>{{ event.starts_at|date }}, {{ event.starts_at|time }} at
-      <a href="http://maps.google.co.uk/maps?q={{ event.venue.address|urlencode }}" title="{{ event.venue.address }}" target="new">
+      <a href="{{ event.venue.map_url }}" title="{{ event.venue.address }}" target="new">
         {{ event.venue.name }}
       </a>
     </h4>
 
+    {% if abridged == None %}
     {{ event.description|linebreaks }}
+    {% endif %}
   </div>
 
 {% endfor %}
