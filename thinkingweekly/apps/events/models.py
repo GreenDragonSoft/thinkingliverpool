@@ -49,6 +49,13 @@ class Venue(models.Model):
     )
 
     @property
+    def twitter_url(self):
+        if self.twitter_handle:
+            return 'https://twitter.com/{}'.format(
+                self.twitter_handle.lstrip('@')
+            )
+
+    @property
     def map_url(self):
         return 'http://maps.google.co.uk/maps?q={}'.format(
             urlquote_plus(self.address)
