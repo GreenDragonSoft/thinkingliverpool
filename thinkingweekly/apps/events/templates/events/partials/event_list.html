@@ -15,7 +15,9 @@
       </a>
     </h4>
 
+    {% if abridged == None %}
     {{ event.description|linebreaks }}
+    {% endif %}
   </div>
 
 {% endfor %}
