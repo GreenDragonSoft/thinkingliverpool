@@ -24,6 +24,16 @@ class Venue(models.Model):
         editable=False,
     )
 
+    slug = models.SlugField(
+        default=None,
+        null=True,
+        blank=True,
+        help_text=(
+            "Add this to give the venue its own web page. Add with care, "
+            "since it shouldn't be changed after it's set."
+        )
+    )
+
     address = models.CharField(max_length=200)
 
     twitter_handle = models.CharField(
