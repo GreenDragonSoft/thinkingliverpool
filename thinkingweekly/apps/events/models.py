@@ -111,7 +111,7 @@ class Event(models.Model):
         )
     )
 
-    venue = models.ForeignKey('Venue')
+    venue = models.ForeignKey('Venue', related_name='events')
 
     organiser = models.ForeignKey(
         'Organiser',
