@@ -124,7 +124,7 @@ USE_L10N = True
 USE_TZ = True
 
 TIME_FORMAT = 'H:i'
-DATE_FORMAT = 'l jS N Y'
+DATE_FORMAT = 'l jS F Y'
 
 # https://docs.djangoproject.com/en/1.9/ref/settings/#time-input-formats
 TIME_INPUT_FORMATS = [
