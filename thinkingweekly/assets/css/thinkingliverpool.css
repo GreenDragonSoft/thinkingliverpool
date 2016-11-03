@@ -93,3 +93,7 @@ section.venue-information .fa {
    */
   display: inline;
 }
+
+section.embedded-map {
+  padding-bottom: 20px;
+}
