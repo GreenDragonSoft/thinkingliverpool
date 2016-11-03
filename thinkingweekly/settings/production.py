@@ -19,6 +19,7 @@ DATABASES = {'default': db_from_env}
 ALLOWED_HOSTS = [
     'www.thinkingliverpool.com',
     'thinkingweekly.herokuapp.com',
+    'thinkingweekly-staging.herokuapp.com',
 ]
 
 LOG_DIR = '/var/log/thinkingweekly'
