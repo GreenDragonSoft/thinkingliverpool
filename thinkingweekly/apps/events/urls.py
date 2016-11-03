@@ -3,6 +3,12 @@ from . import views
 # from .feeds import UpdateFeed
 
 DATE_PATTERN = '\d{4}-\d{2}-\d{2}'
+MONTH_PATTERN = (
+    'january|february|march|april|may|june|july|august|september|october|'
+    'november|december'
+)
+YEAR_PATTERN = '\d{4}'
+
 
 urlpatterns = [
     url(r'^$',
@@ -20,6 +26,11 @@ urlpatterns = [
     url(r'^whats-on-in-liverpool/past-events/$',
         views.PastUpdatesList.as_view(),
         name='events.past_updates'),
+
+    url(r'^whats-on-in-liverpool/(?P<month>' + MONTH_PATTERN
+        + ')-(?P<year>' + YEAR_PATTERN + ')/$',
+        views.MonthYearEventList.as_view(),
+        name='events.month_year_event_list'),
 
     url(r'^whats-on-in-liverpool/(?P<date>' + DATE_PATTERN + ')/$',
         views.WeeklyUpdateEventList.as_view(),
