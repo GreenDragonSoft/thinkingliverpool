@@ -166,10 +166,15 @@ class Event(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse(
-            'events.event_detail',
-            kwargs={'pk': self.id, 'slug': self.slug}
-        )
+        if self.starts_at >= timezone.now():  # event is in the future
+            return reverse(
+                'events.event_list'
+                ) + '#{}'.format(self.slug)
+        else:
+            return reverse(
+                'events.event_detail',
+                kwargs={'pk': self.id, 'slug': self.slug}
+            )
 
     def twitter_handles(self):
         handles = filter(None, [
