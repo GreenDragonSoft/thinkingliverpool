@@ -4,7 +4,7 @@ STATIC = thinkingweekly/static
 all: $(STATIC)/css/combined.min.css $(STATIC)/js/combined.min.js
 	
 
-$(STATIC)/css/combined.min.css: $(ASSETS)/css/bootstrap.min.css $(ASSETS)/css/font-awesome.min.css $(ASSETS)/css/thinkingliverpool.min.css
+$(STATIC)/css/combined.min.css: $(ASSETS)/css/bootstrap.min.css $(ASSETS)/css/thinkingliverpool.min.css
 	cat $^ > $@
 
 $(STATIC)/js/combined.min.js: $(ASSETS)/js/jquery-3.1.1.min.js $(ASSETS)/js/bootstrap.min.js
