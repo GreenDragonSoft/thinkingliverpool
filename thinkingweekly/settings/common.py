@@ -199,7 +199,7 @@ else:
     AWS_S3_METADATA = {}
 
     # Static
-    STATICFILES_STORAGE = 'django_s3_storage.storage.StaticS3Storage'
+    STATICFILES_STORAGE = 'django_s3_storage.storage.ManifestStaticS3Storage'
     AWS_S3_CALLING_FORMAT_STATIC = "boto.s3.connection.OrdinaryCallingFormat"
     AWS_S3_BUCKET_AUTH_STATIC = False  # querystring authentication
     AWS_S3_KEY_PREFIX_STATIC = "static"
