@@ -39,7 +39,30 @@
     {% if future_events %}
       <hr>
       <section>
-      {% include "events/partials/event_list.html" with events=future_events only %}
+        {% for event in future_events %}
+
+          <div class="panel panel-default event">
+            <div class="panel-heading">
+              <div class="panel-title">
+                <h2>
+                  <a class="oldskool" href="{{ event.external_url }}" target="new">
+                     {{ event.title }}
+                  </a>
+                </h2>
+                <h3>
+                  {{ event.starts_at|date }} at {{ event.starts_at|time }}
+                </h3>
+              </div>
+            </div>
+
+            <div class="panel-body">
+
+              {{ event.description|truncatewords:50 }}
+
+            </div>
+          </div>
+
+        {% endfor %}
       </section>
     {% endif %}
 
@@ -47,7 +70,33 @@
       <hr>
       <section>
         <h2>Past events at {{ venue.name }}</h2>
-        {% include "events/partials/event_list.html" with events=past_events abridged=true only %}
+
+        {% for event in past_events %}
+
+          <a id="{{ event.slug }}"></a>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="panel-title">
+                <h3>
+                  <a class="oldskool" href="{{ event.external_url }}" target="new">
+                     {{ event.title }}
+                  </a>
+                </h3>
+
+                <h4>
+                  {{ event.starts_at|date }}
+                </h4>
+              </div>
+            </div>
+
+            <div class="panel-body">
+              {{ event.description|truncatewords:20 }}
+            </div>
+
+          </div>
+
+        {% endfor %}
       </section
     {% endif %}
 
