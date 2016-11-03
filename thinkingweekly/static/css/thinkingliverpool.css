@@ -83,13 +83,13 @@ section.venue-information {
   margin-bottom: 20px;
 }
 
-span.venue-information-snippet a {
-  margin-left: 5px;
+section.venue-information a {
+  padding-right: 10px;
 }
 
-span.venue-information-snippet i {
-  /* When two snippets are on the same line, shunt the right one to the
-   * right a bit.
+section.venue-information .fa {
+  /* Prevent the icon and the text from getting separated
+   * http://stackoverflow.com/a/25233914
    */
-  margin-right: 10px;
+  display: inline;
 }
