@@ -9,11 +9,11 @@
       </a>
     </h2>
 
-    <h4>{{ event.starts_at|date }}, {{ event.starts_at|time }} at
+    <h3>{{ event.starts_at|date }}, {{ event.starts_at|time }} at
       <a href="{{ event.venue.map_url }}" title="{{ event.venue.address }}" target="new">
         {{ event.venue.name }}
       </a>
-    </h4>
+    </h3>
 
     {% if abridged == None %}
     {{ event.description|linebreaks }}
