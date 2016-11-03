@@ -13,7 +13,7 @@ urlpatterns = [
         views.About.as_view(),
         name='events.about'),
 
-    url(r'^events-in-liverpool/$',
+    url(r'^whats-on-in-liverpool/$',
         views.EventList.as_view(),
         name='events.event_list'),
 

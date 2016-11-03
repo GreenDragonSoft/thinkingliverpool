@@ -1,17 +1,31 @@
 {% extends "thinkingweekly/base.html" %}
 {% load static from staticfiles %}
 
+{% block title %}
+<title>Find out what's on in Liverpool | Thinking Liverpool</title>
+{% endblock %}
+
+{% block description %}
+<meta name="description" content="All the amazing events and what's on in Liverpool to do with Science, History, Politics and Community, sign up for our newsletter and don't miss out!">
+{% endblock %}
+
 {% block content %}
 
   <div class="container-fluid site-home-banner">
     <div class="container">
 
-      <h1 class="explainer">Talks, Debates &amp; Interesting Events</h1>
+      <h1 class="explainer">What's On In Liverpool</h1>
 
       <div class="row">
         <div class="col-md-12">
-          <div class="jumbotron">
-            <h2>Sign up for a hand-picked, weekly update</h2>
+          <div class="jumbotron site-home-jumbotron">
+            <h2>A weekly list of events on Science, Community, Politics &amp; History</h2>
+            <ul class="list-group">
+              <li class="list-group-item">Learn new things and meet like-minded people.</li>
+              <li class="list-group-item">Discover the organisations running interesting events.</li>
+              <li class="list-group-item">Receive a carefully curated list of what's on.</li>
+              <li class="list-group-item">Never miss out with our weekly email.</li>
+            </ul>
             {% include "events/partials/subscribe_form.html" %}
           </div>
         </div>
@@ -38,7 +52,7 @@
       </div>
 
       <p class="see-future-events">
-        <a class="btn btn-default" href="{% url "events.event_list" %}">
+        <a class="btn btn-primary" href="{% url "events.event_list" %}">
           See more events
         </a>
       </p>

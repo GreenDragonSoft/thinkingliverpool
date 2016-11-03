@@ -1,10 +1,17 @@
 {% extends "thinkingweekly/base.html" %}
 
+{% block title %}
+<title>What's On In Liverpool | Thinking Liverpool</title>
+{% endblock %}
+
+{% block description %}
+<meta name="description" content="Find out what interesting events are going on in Liverpool. Never miss out by signing up to our weekly newsletter. Stay in the know about upcoming events!">
+{% endblock %}
 
 {% block content %}
 
   <div class="container">
-    <h1>Events in Liverpool</h1>
+    <h1>What's On In Liverpool</h1>
 
     {% include "events/partials/event_list.html" with events=events only %}
 
