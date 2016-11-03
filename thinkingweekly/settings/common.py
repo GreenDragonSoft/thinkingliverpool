@@ -192,6 +192,7 @@ else:
     AWS_S3_KEY_PREFIX = "uploads"
     AWS_S3_BUCKET_AUTH = True  # querystring auth
     AWS_S3_MAX_AGE_SECONDS = 10 * 60
+    AWS_S3_GZIP = True
     AWS_S3_PUBLIC_URL = ""
     AWS_S3_REDUCED_REDUNDANCY = False
     AWS_S3_METADATA = {}
@@ -202,6 +203,7 @@ else:
     AWS_S3_BUCKET_AUTH_STATIC = False  # querystring authentication
     AWS_S3_KEY_PREFIX_STATIC = "static"
     AWS_S3_MAX_AGE_SECONDS_STATIC = 60 * 60 * 24 * 365  # 1 year.
+    AWS_S3_GZIP_STATIC = True
     AWS_S3_PUBLIC_URL_STATIC = ""
     AWS_S3_REDUCED_REDUNDANCY_STATIC = False
     AWS_S3_METADATA_STATIC = {}
