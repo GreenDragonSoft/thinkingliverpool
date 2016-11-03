@@ -69,6 +69,12 @@ class Venue(models.Model):
         self.sort_name = self._calculate_sort_name()
         super(Venue, self).save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse(
+            'events.venue_event_list',
+            kwargs={'slug': self.slug}
+        )
+
     def _calculate_sort_name(self):
         return calculate_venue_sort_name(self.name)
 
