@@ -59,6 +59,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.gzip.GZipMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -192,17 +193,22 @@ else:
     AWS_S3_KEY_PREFIX = "uploads"
     AWS_S3_BUCKET_AUTH = True  # querystring auth
     AWS_S3_MAX_AGE_SECONDS = 10 * 60
+    AWS_S3_GZIP = True
     AWS_S3_PUBLIC_URL = ""
     AWS_S3_REDUCED_REDUNDANCY = False
     AWS_S3_METADATA = {}
 
     # Static
-    STATICFILES_STORAGE = 'django_s3_storage.storage.StaticS3Storage'
+    STATICFILES_STORAGE = 'django_s3_storage.storage.ManifestStaticS3Storage'
     AWS_S3_CALLING_FORMAT_STATIC = "boto.s3.connection.OrdinaryCallingFormat"
     AWS_S3_BUCKET_AUTH_STATIC = False  # querystring authentication
     AWS_S3_KEY_PREFIX_STATIC = "static"
     AWS_S3_MAX_AGE_SECONDS_STATIC = 60 * 60 * 24 * 365  # 1 year.
-    AWS_S3_PUBLIC_URL_STATIC = ""
+    AWS_S3_GZIP_STATIC = True
+    AWS_S3_PUBLIC_URL_STATIC = (
+        "http://s3-eu-west-1.amazonaws.com/"
+        "thinkingweekly-static-staging/static/"
+    )
     AWS_S3_REDUCED_REDUNDANCY_STATIC = False
     AWS_S3_METADATA_STATIC = {}
 
