@@ -10,7 +10,12 @@
     </h2>
 
     <h3>{{ event.starts_at|date }}, {{ event.starts_at|time }} at
-      <a href="{{ event.venue.map_url }}" title="{{ event.venue.address }}" target="new">
+        {% if event.venue.slug %}
+          <a href="{% url "events.venue_event_list" slug=event.venue.slug %}" title="{{ event.venue.address }}" target="new">
+        {% else %}
+          <a href="{{ event.venue.map_url }}" title="{{ event.venue.address }}" target="new">
+        {% endif %}
+
         {{ event.venue.name }}
       </a>
     </h3>
