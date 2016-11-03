@@ -11,7 +11,7 @@
 
     <h3>{{ event.starts_at|date }}, {{ event.starts_at|time }} at
         {% if event.venue.slug %}
-          <a href="{% url "events.venue_event_list" slug=event.venue.slug %}" title="{{ event.venue.address }}" target="new">
+          <a href="{% url "events.venue_event_list" slug=event.venue.slug %}" title="{{ event.venue.address }}">
         {% else %}
           <a href="{{ event.venue.map_url }}" title="{{ event.venue.address }}" target="new">
         {% endif %}
