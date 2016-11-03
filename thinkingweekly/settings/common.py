@@ -205,10 +205,7 @@ else:
     AWS_S3_KEY_PREFIX_STATIC = "static"
     AWS_S3_MAX_AGE_SECONDS_STATIC = 60 * 60 * 24 * 365  # 1 year.
     AWS_S3_GZIP_STATIC = True
-    AWS_S3_PUBLIC_URL_STATIC = (
-        "http://s3-eu-west-1.amazonaws.com/"
-        "thinkingweekly-static-staging/static/"
-    )
+    AWS_S3_PUBLIC_URL_STATIC = ""
     AWS_S3_REDUCED_REDUNDANCY_STATIC = False
     AWS_S3_METADATA_STATIC = {}
 
