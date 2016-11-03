@@ -58,8 +58,12 @@ class Venue(models.Model):
     @property
     def map_url(self):
         return 'http://maps.google.co.uk/maps?q={}'.format(
-            urlquote_plus(self.address)
+            urlquote_plus(self.map_query)
         )
+
+    @property
+    def map_query(self):
+        return self.name + ', ' + self.address
 
     def save(self, *args, **kwargs):
         self.sort_name = self._calculate_sort_name()
