@@ -1,3 +1,21 @@
+ASSETS = thinkingweekly/assets
+STATIC = thinkingweekly/static
+
+all: $(STATIC)/css/combined.min.css
+	
+
+$(STATIC)/css/combined.min.css: $(ASSETS)/css/bootstrap.min.css $(ASSETS)/css/font-awesome.min.css $(ASSETS)/css/thinkingliverpool.min.css
+	cat $^ > $@
+
+$(ASSETS)/css/thinkingliverpool.min.css: $(ASSETS)/css/thinkingliverpool.css
+	yui-compressor $? > $@
+
+.PHONY: clean
+clean:
+	rm -f $(ASSETS)/css/thinkingliverpool.min.css
+	rm -f $(STATIC)/css/combined.min.css
+
+
 .PHONY: test
 test:
 	./manage.py test -v 3 --failfast

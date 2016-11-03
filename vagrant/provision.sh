@@ -10,7 +10,7 @@ install_postgresql() {
 }
 
 install_system_dependencies() {
-  apt-get install -y python3 python3-dev python-virtualenv libjpeg-dev libxml2-dev libxslt1-dev unzip nodejs-legacy npm
+  apt-get install -y python3 python3-dev python-virtualenv libjpeg-dev libxml2-dev libxslt1-dev unzip nodejs-legacy npm yui-compressor
   gem install sass
 }
 
