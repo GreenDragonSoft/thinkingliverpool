@@ -13,21 +13,21 @@ urlpatterns = [
         views.About.as_view(),
         name='events.about'),
 
-    url(r'^events-in-liverpool/$',
+    url(r'^whats-on-in-liverpool/$',
         views.EventList.as_view(),
         name='events.event_list'),
 
-    url(r'^events-in-liverpool/past-events/$',
+    url(r'^whats-on-in-liverpool/past-events/$',
         views.PastUpdatesList.as_view(),
         name='events.past_updates'),
 
-    url(r'^events-in-liverpool/(?P<slug>.+)/$',
-        views.VenueEventList.as_view(),
-        name='events.venue_event_list'),
-
-    url(r'^events-in-liverpool/(?P<date>' + DATE_PATTERN + ')/$',
+    url(r'^whats-on-in-liverpool/(?P<date>' + DATE_PATTERN + ')/$',
         views.WeeklyUpdateEventList.as_view(),
         name='events.weekly_update_event_list'),
+
+    url(r'^whats-on-in-liverpool/(?P<slug>.+)/$',
+        views.VenueEventList.as_view(),
+        name='events.venue_event_list'),
 
     url(r'^e/(?P<slug>.+)/(?P<pk>\d+)/$',
         views.EventDetail.as_view(),

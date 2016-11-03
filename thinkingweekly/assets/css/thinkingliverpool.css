@@ -17,16 +17,22 @@
   color: white;
 }
 
-.site-home-banner .jumbotron {
-  background-color:  rgba(247,247,247, 0.4);
-}
-
 h1.explainer {
   font-weight: lighter;
 }
 
-h2 {
+.site-home-banner .jumbotron {
+  background-color:  rgba(247,247,247, 0.4);
+}
+
+.site-home-banner .jumbotron h2 {
   font-size: 28px;
+}
+
+.site-home-banner .jumbotron li {
+  background: none;
+  border: none;
+  color: white;
 }
 
 div.subscribe-form {
