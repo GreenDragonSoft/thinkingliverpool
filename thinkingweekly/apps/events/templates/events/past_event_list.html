@@ -1,0 +1,30 @@
+{% extends "thinkingweekly/base.html" %}
+
+
+{% block content %}
+
+  <div class="container">
+    <h1>Past event updates</h1>
+
+    <div class="past-event-updates">
+
+      {% for month in months %}
+      <h2>
+        <a href="{% url "events.month_year_event_list" month=month.name year=month.year %}">
+          {{ month.name|title }} {{ month.year }}
+        </a>
+      </h2>
+
+      <ul>
+        {% for event in month.events %}
+        <li><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></li>
+        {% endfor %}
+      </ul>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+{% endblock %}

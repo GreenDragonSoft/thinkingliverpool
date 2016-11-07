@@ -7,7 +7,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.utils import timezone
 
-from .models import Event, Update, Venue
+from .models import Event, Update, Venue, get_events_by_month
 
 
 class SiteHome(TemplateView):
@@ -40,6 +40,13 @@ class EventList(ListView):
     queryset = Event.objects.filter(
         starts_at__gte=timezone.now(),
     )
+
+
+class PastEventList(TemplateView):
+    template_name = 'events/past_event_list.html'
+
+    def get_context_data(self):
+        return {'months': get_events_by_month()}
 
 
 class MonthYearEventList(ListView):

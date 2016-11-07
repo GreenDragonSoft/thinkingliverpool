@@ -24,6 +24,10 @@ urlpatterns = [
         name='events.event_list'),
 
     url(r'^whats-on-in-liverpool/past-events/$',
+        views.PastEventList.as_view(),
+        name='events.past_events'),
+
+    url(r'^whats-on-in-liverpool/past-events/$',  # TODO: remove me
         views.PastUpdatesList.as_view(),
         name='events.past_updates'),
 
