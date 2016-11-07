@@ -172,9 +172,12 @@ class Event(models.Model):
                 ) + '#{}'.format(self.slug)
         else:
             return reverse(
-                'events.event_detail',
-                kwargs={'pk': self.id, 'slug': self.slug}
-            )
+                'events.month_year_event_list',
+                kwargs={
+                    'month': self.starts_at.date().strftime('%B').lower(),
+                    'year': self.starts_at.date().year
+                }
+            ) + '#{}'.format(self.slug)
 
     def twitter_handles(self):
         handles = filter(None, [
