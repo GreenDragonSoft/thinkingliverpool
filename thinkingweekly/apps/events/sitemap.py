@@ -23,4 +23,4 @@ class VenueSitemap(Sitemap):
     priority = 0.7
 
     def items(self):
-        return Venue.objects.filter(slug__isnull=False)
+        return Venue.objects.exclude(slug__isnull=True).exclude(slug__exact='')
