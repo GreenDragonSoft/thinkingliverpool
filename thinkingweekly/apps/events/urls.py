@@ -36,10 +36,6 @@ urlpatterns = [
         views.VenueEventList.as_view(),
         name='events.venue_event_list'),
 
-    url(r'^e/(?P<slug>.+)/(?P<pk>\d+)/$',
-        views.EventDetail.as_view(),
-        name='events.event_detail'),
-
     url(r'^u/(?P<date>' + DATE_PATTERN + ')/email-preview/$',
         views.UpdateEmailPreview.as_view(),
         name='events.update_email_preview'),

@@ -1,7 +1,6 @@
 import calendar
 import datetime
 
-from django.shortcuts import redirect
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -98,20 +97,6 @@ class MonthYearEventList(ListView):
         }[self.kwargs['month']]
         year = int(self.kwargs['year'])
         return month, year
-
-
-class CanonicalDetailViewMixin():
-    def get(self, request, **kwargs):
-        self.object = self.get_object()
-
-        if self.request.path != self.object.get_absolute_url():
-            return redirect(self.object)
-        else:
-            return super(CanonicalDetailViewMixin, self).get(request, **kwargs)
-
-
-class EventDetail(CanonicalDetailViewMixin, DetailView):
-    model = Event
 
 
 class VenueEventList(DetailView):
