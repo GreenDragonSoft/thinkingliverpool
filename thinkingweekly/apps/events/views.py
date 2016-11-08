@@ -100,7 +100,6 @@ class MonthYearEventList(ListView):
         return month, year
 
 
-
 class CanonicalDetailViewMixin():
     def get(self, request, **kwargs):
         self.object = self.get_object()
@@ -134,29 +133,16 @@ class VenueEventList(DetailView):
         return ctx
 
 
-class WeeklyUpdateEventList(DetailView):
+class UpdateEmailPreview(DetailView):
     model = Update
     context_object_name = 'update'
-    template_name = "events/weekly_update_event_list.html"
+    template_name = "events/email/weekly_update.html"
 
     def get_object(self):
         return Update.objects.get(start_date=self.kwargs['date'])
 
     def get_context_data(self, *args, **kwargs):
-        ctx = super(WeeklyUpdateEventList, self).get_context_data(
+        ctx = super(UpdateEmailPreview, self).get_context_data(
             *args, **kwargs)
         ctx['events'] = self.object.events
         return ctx
-
-
-class UpdateEmailPreview(WeeklyUpdateEventList):
-    template_name = "events/email/weekly_update.html"
-
-
-class PastUpdatesList(ListView):
-    model = Update
-    context_object_name = 'updates'
-    template_name = "events/past_updates_list.html"
-    queryset = Update.objects.filter(
-        end_date__lte=timezone.now()
-    ).order_by('-start_date')

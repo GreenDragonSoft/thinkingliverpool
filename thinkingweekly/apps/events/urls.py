@@ -27,18 +27,10 @@ urlpatterns = [
         views.PastEventList.as_view(),
         name='events.past_events'),
 
-    url(r'^whats-on-in-liverpool/past-events/$',  # TODO: remove me
-        views.PastUpdatesList.as_view(),
-        name='events.past_updates'),
-
     url(r'^whats-on-in-liverpool/(?P<month>' + MONTH_PATTERN
         + ')-(?P<year>' + YEAR_PATTERN + ')/$',
         views.MonthYearEventList.as_view(),
         name='events.month_year_event_list'),
-
-    url(r'^whats-on-in-liverpool/(?P<date>' + DATE_PATTERN + ')/$',
-        views.WeeklyUpdateEventList.as_view(),
-        name='events.weekly_update_event_list'),
 
     url(r'^whats-on-in-liverpool/(?P<slug>.+)/$',
         views.VenueEventList.as_view(),
