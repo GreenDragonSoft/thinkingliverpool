@@ -1,3 +1,4 @@
+import datetime
 import re
 
 from django.db import models
@@ -14,6 +15,42 @@ def calculate_venue_sort_name(venue_name):
     We want eg "Liverpool Central Library" to sort next to "Central Library"
     """
     return re.sub(r'^((The|Liverpool)\s*)', '', venue_name)
+
+
+def get_events_by_month():
+    def get_events_for(month, year):
+        return Event.objects.filter(
+            starts_at__date__year=year,
+            starts_at__date__month=month,
+        )
+
+    try:
+        earliest_event = Event.objects.all().order_by('starts_at')[0]
+        earliest_date = earliest_event.starts_at.date()
+    except KeyError:
+        return
+
+    this_month_mid = (
+        timezone.now().date().replace(day=14)
+    )
+
+    for i in range(1, 20 * 12):  # just-in-case limit to 20 years
+        day = (
+            this_month_mid - (i * datetime.timedelta(days=30.5))
+        ).replace(day=14)
+
+        if day.month < earliest_date.month:
+            break  # finished!
+
+        yield {
+            'name': day.strftime('%B').lower(),   # 'november'
+            'month': day.month,                   # 11
+            'year': day.year,                     # 2016
+            'events': get_events_for(day.month, day.year)
+        }
+    else:
+        raise RuntimeError("This shouldn't happen")
+        pass
 
 
 class Venue(models.Model):
@@ -172,9 +209,12 @@ class Event(models.Model):
                 ) + '#{}'.format(self.slug)
         else:
             return reverse(
-                'events.event_detail',
-                kwargs={'pk': self.id, 'slug': self.slug}
-            )
+                'events.month_year_event_list',
+                kwargs={
+                    'month': self.starts_at.date().strftime('%B').lower(),
+                    'year': self.starts_at.date().year
+                }
+            ) + '#{}'.format(self.slug)
 
     def twitter_handles(self):
         handles = filter(None, [

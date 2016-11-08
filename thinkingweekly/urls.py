@@ -21,7 +21,9 @@ from django.views import static
 
 from django.contrib.sitemaps.views import sitemap
 
-from thinkingweekly.apps.events.sitemap import UpdateSitemap, VenueSitemap
+from thinkingweekly.apps.events.sitemap import (
+    VenueSitemap, MonthYearSitemap
+)
 
 
 # http://www.thinkingliverpool.com                   <-- upcoming events
@@ -31,8 +33,8 @@ from thinkingweekly.apps.events.sitemap import UpdateSitemap, VenueSitemap
 # ^^ note that 5iwJyIPI is the created_at 20160714221816 in a new base
 
 sitemaps = {
-    'past_updates': UpdateSitemap,
-    'venues': VenueSitemap
+    'venues': VenueSitemap,
+    'month_year_pages': MonthYearSitemap,
 }
 
 urlpatterns = [

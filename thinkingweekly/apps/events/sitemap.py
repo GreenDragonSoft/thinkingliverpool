@@ -1,21 +1,26 @@
 from django.contrib.sitemaps import Sitemap
-from django.utils import timezone
+from django.core.urlresolvers import reverse
 
-from .models import Update, Venue
+from .models import Venue, get_events_by_month
 
 
-class UpdateSitemap(Sitemap):
-    changefreq = "never"
+class MonthYearSitemap(Sitemap):
+    changefreq = "monthly"
     priority = 0.5
 
     def items(self):
-        return Update.objects.filter(
-            start_date__lte=timezone.now(),
-            ready_to_post=True
-        )
+        return [
+            (x['name'], x['year'])
+            for x in get_events_by_month()
+        ]
 
-    # def lastmod(self, obj):
-    #    return obj.updated_at=
+    def location(self, month_year_tuple):
+        month, year = month_year_tuple
+
+        return reverse('events.month_year_event_list', kwargs={
+            'month': month,
+            'year': year,
+        })
 
 
 class VenueSitemap(Sitemap):
