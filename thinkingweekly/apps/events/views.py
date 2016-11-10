@@ -1,7 +1,10 @@
 import calendar
 import datetime
 
+from django.core.urlresolvers import reverse
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import TemplateView
+from django.views.generic.base import View
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.utils import timezone
@@ -26,6 +29,18 @@ class SiteHome(TemplateView):
             return upcoming_events[0]
         else:
             return None
+
+
+class RedirectToEvent(View):
+    model = Event
+
+    def get(self, request, *args, **kwargs):
+        event = get_object_or_404(Event, id=kwargs['pk'])
+
+        if event.starts_at >= timezone.now():  # event is in the future
+            return redirect(event.get_future_url(), permanent=False)
+        else:
+            return redirect(event.get_past_url(), permanent=True)
 
 
 class About(TemplateView):

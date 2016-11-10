@@ -204,18 +204,19 @@ class Event(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        if self.starts_at >= timezone.now():  # event is in the future
-            return reverse(
-                'events.event_list'
-                ) + '#{}'.format(self.slug)
-        else:
-            return reverse(
-                'events.month_year_event_list',
-                kwargs={
-                    'month': self.starts_at.date().strftime('%B').lower(),
-                    'year': self.starts_at.date().year
-                }
-            ) + '#{}'.format(self.slug)
+        return reverse('events.event_redirect', kwargs={'pk': self.id})
+
+    def get_future_url(self):
+        return reverse('events.event_list') + '#{}'.format(self.slug)
+
+    def get_past_url(self):
+        return reverse(
+            'events.month_year_event_list',
+            kwargs={
+                'month': self.starts_at.date().strftime('%B').lower(),
+                'year': self.starts_at.date().year
+            }
+        ) + '#{}'.format(self.slug)
 
     def twitter_handles(self):
         handles = filter(None, [
