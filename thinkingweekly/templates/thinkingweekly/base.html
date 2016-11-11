@@ -22,9 +22,6 @@
     <link rel="shortcut icon" href="{% static "img/favicon.ico" %}" type="image/x-icon">
     <link rel="icon" href="{% static "img/favicon.ico" %}" type="image/x-icon">
 
-    <link href="{% static "css/combined.min.css" %}" rel="stylesheet">
-
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -108,7 +105,26 @@
             </div>
         </div>
     </footer>
-    <script src="{% static "js/combined.min.js" %}"></script>
+
+    <script>
+      <!-- asynchronously load the combined CSS and javascript -->
+      var cb = function() {
+        var l = document.createElement('link');
+        l.rel = 'stylesheet';
+        l.href = '{% static "css/combined.min.css" %}';
+
+        var s = document.createElement('script');
+        s.src = '{% static "js/combined.min.js" %}';
+
+        var h = document.getElementsByTagName('head')[0];
+        h.appendChild(l);
+        h.appendChild(s);
+      };
+      var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+      webkitRequestAnimationFrame || msRequestAnimationFrame;
+      if (raf) raf(cb);
+      else window.addEventListener('load', cb);
+    </script>
 
     <script type="text/javascript">
       WebFontConfig = {
