@@ -53,7 +53,7 @@ class EventList(ListView):
     context_object_name = 'events'
     queryset = Event.objects.filter(
         starts_at__gte=timezone.now(),
-    )
+    ).select_related('venue')
 
 
 class PastEventList(TemplateView):
