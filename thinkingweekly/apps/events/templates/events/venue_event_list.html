@@ -18,18 +18,18 @@
 
       <section class="venue-information">
         <span class="venue-information-snippet">
-          <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;<a href="{{ venue.map_url }}" target="new">{{ venue.address }}</a>
+          <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>&nbsp;<a href="{{ venue.map_url }}" target="new">{{ venue.address }}</a>
         </span>
 
         {% if venue.website %}
         <span class="venue-information-snippet">
-          <i class="fa fa-external-link" aria-hidden="true"></i>&nbsp;<a href="{{ venue.website }}" target="new">{{ venue.website }}</a>
+          <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<a href="{{ venue.website }}" target="new">{{ venue.website }}</a>
         </span>
         {% endif %}
 
         {% if venue.twitter_handle %}
         <span class="venue-information-snippet">
-          <i class="fa fa-twitter" aria-hidden="true"></i>&nbsp;<a href="{{ venue.twitter_url }}">{{ venue.twitter_handle }}</a>
+          <a href="{{ venue.twitter_url }}">{{ venue.twitter_handle }}</a>
         </span>
         {% endif %}
 
