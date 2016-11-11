@@ -76,29 +76,29 @@ class TestEventTweet(TestCase):
     def test_morning_event(self):
         with self._make_event(starts_at=self.MORNING) as e:
             assert_equal(
-                'A talk Fri 07:30 thinkingliverpool.com',
+                'A talk Fri 07:30 thinkingliverpool.com/e{}'.format(e.id),  # noqa
                 e.create_tweet()
             )
 
     def test_evening_event(self):
         with self._make_event(starts_at=self.EVENING) as e:
             assert_equal(
-                'A talk Fri 19:30 thinkingliverpool.com',
+                'A talk Fri 19:30 thinkingliverpool.com/e{}'.format(e.id),  # noqa',
                 e.create_tweet()
-            )
+            )  # noqa
 
     def test_venue_with_twitter_handle(self):
         with self._make_event(starts_at=self.EVENING,
                               venue_twitter='@venue') as e:
             assert_equal(
-                'A talk Fri 19:30 @venue thinkingliverpool.com',
+                'A talk Fri 19:30 @venue thinkingliverpool.com/e{}'.format(e.id),  # noqa
                 e.create_tweet()
             )
 
     def test_with_no_organiser_set(self):
         with self._make_event(starts_at=self.EVENING, no_organiser=True) as e:
             assert_equal(
-                'A talk Fri 19:30 thinkingliverpool.com',
+                'A talk Fri 19:30 thinkingliverpool.com/e{}'.format(e.id),  # noqa
                 e.create_tweet()
             )
 
@@ -106,7 +106,7 @@ class TestEventTweet(TestCase):
         with self._make_event(starts_at=self.EVENING,
                               organiser_twitter='@organiser') as e:
             assert_equal(
-                'A talk Fri 19:30 @organiser thinkingliverpool.com',
+                'A talk Fri 19:30 @organiser thinkingliverpool.com/e{}'.format(e.id),  # noqa
                 e.create_tweet()
             )
 
@@ -114,7 +114,7 @@ class TestEventTweet(TestCase):
         with self._make_event(starts_at=self.EVENING,
                               extra_twitter='@event') as e:
             assert_equal(
-                'A talk Fri 19:30 @event thinkingliverpool.com',
+                'A talk Fri 19:30 @event thinkingliverpool.com/e{}'.format(e.id),  # noqa
                 e.create_tweet()
             )
 
@@ -126,7 +126,7 @@ class TestEventTweet(TestCase):
 
             assert_equal(
                 'A talk Fri 19:30 @venue @organiser @event '
-                'thinkingliverpool.com',
+                'thinkingliverpool.com/e{}'.format(e.id),  # noqa
                 e.create_tweet()
             )
 
@@ -137,7 +137,7 @@ class TestEventTweet(TestCase):
                               extra_twitter='@event') as e:
 
             assert_equal(
-                'A talk Fri 19:30 @dupe @event thinkingliverpool.com',
+                'A talk Fri 19:30 @dupe @event thinkingliverpool.com/e{}'.format(e.id),  # noqa
                 e.create_tweet()
             )
 
@@ -148,7 +148,7 @@ class TestEventTweet(TestCase):
                               extra_twitter='@event') as e:
 
             assert_equal(
-                'A talk Fri 19:30 @dupe @event thinkingliverpool.com',
+                'A talk Fri 19:30 @dupe @event thinkingliverpool.com/e{}'.format(e.id),  # noqa
                 e.create_tweet()
             )
 
@@ -157,7 +157,7 @@ class TestEventTweet(TestCase):
                 freezegun.freeze_time('2016-01-01'):
 
             assert_equal(
-                'A talk Thu 16:00 thinkingliverpool.com',
+                'A talk Thu 16:00 thinkingliverpool.com/e{}'.format(e.id),  # noqa
                 e.create_tweet()
             )
 
@@ -165,7 +165,7 @@ class TestEventTweet(TestCase):
         with self._make_event(starts_at=self.SUMMER_DATETIME) as e, \
                 freezegun.freeze_time('2016-06-01'):
             assert_equal(
-                'A talk Thu 16:00 thinkingliverpool.com',
+                'A talk Thu 16:00 thinkingliverpool.com/e{}'.format(e.id),  # noqa
                 e.create_tweet()
             )
 
@@ -173,7 +173,7 @@ class TestEventTweet(TestCase):
         with self._make_event(starts_at=self.WINTER_DATETIME) as e, \
                 freezegun.freeze_time('2016-06-01'):
             assert_equal(
-                'A talk Fri 16:00 thinkingliverpool.com',
+                'A talk Fri 16:00 thinkingliverpool.com/e{}'.format(e.id),  # noqa
                 e.create_tweet()
             )
 
@@ -181,7 +181,7 @@ class TestEventTweet(TestCase):
         with self._make_event(starts_at=self.WINTER_DATETIME) as e, \
                 freezegun.freeze_time('2016-01-01'):
             assert_equal(
-                'A talk Fri 16:00 thinkingliverpool.com',
+                'A talk Fri 16:00 thinkingliverpool.com/e{}'.format(e.id),  # noqa
                 e.create_tweet()
             )
 
@@ -194,7 +194,7 @@ class TestEventTweet(TestCase):
                               title=title) as e:
             assert_equal(
                 'Test Γαζέες καὶ μυρτιὲς δὲν θὰ βρῶ πιὰ στὸ χρυσαφὶ ξέφωτο'
-                ' Fri 19:30 thinkingliverpool.com',
+                ' Fri 19:30 thinkingliverpool.com/e{}'.format(e.id),  # noqa'
                 e.create_tweet()
             )
 
@@ -211,14 +211,13 @@ class TestEventTweet(TestCase):
 
             tweet = e.create_tweet()
 
-            # 'thinkingliverpool.com' is 21 characters, twitter always uses 23
-            # characters for any URL, so we have 2 fewer characters than we
-            # expect
+            # supposedly the minimum number of characters twitter uses for a
+            # URL is 23, so we can't ever be below that.
 
-            assert_equal(138, len(tweet))
+            assert_equal(140, len(tweet))
             assert_equal(
                 "this is a really long tweet that's going to go over the "
-                "limit if we're not caref… Fri 19:30 @venue @organiser @event "
-                "thinkingliverpool.com",
+                "limit if we're not car… Fri 19:30 @venue @organiser @event "
+                "thinkingliverpool.com/e{}".format(e.id),  # noqa
                 tweet
             )
