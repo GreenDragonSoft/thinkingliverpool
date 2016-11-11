@@ -15,7 +15,7 @@ urlpatterns = [
         views.SiteHome.as_view(),
         name='site_home'),
 
-    url(r'^about/$',
+    url(r'^about-thinking-liverpool/$',
         views.About.as_view(),
         name='events.about'),
 
