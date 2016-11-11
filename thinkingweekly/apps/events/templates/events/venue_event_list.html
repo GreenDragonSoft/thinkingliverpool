@@ -4,6 +4,13 @@
 <title>What's on at {{ venue.name }} | Thinking Liverpool</title>
 {% endblock %}
 
+{% if not past_events and not previous_events %}
+  {% block extra_head %}
+    <!-- This page is empty (stub) - don't let search engines index it -->
+    {% include "events/partials/meta_noindex.html" %}
+  {% endblock %}
+{% endif %}
+
 {% block content %}
 
   <div class="container">
@@ -36,22 +43,33 @@
 
       </section>
 
-    {% if future_events %}
       <hr>
-      <section>
+      <section class="venue-future-events">
+        <h2>Future events at {{ venue.name }}</h2>
+
+        {% if not future_events %}
+        <p class="lead">
+          We don't know about any events at the moment.<br>
+        </p>
+
+        <a class="btn btn-primary" href="{% url "events.event_list" %}">See all future events</a>
+        {% endif %}
+
+
+
         {% for event in future_events %}
 
           <div class="panel panel-default event">
             <div class="panel-heading">
               <div class="panel-title">
-                <h2>
-                  <a class="oldskool" href="{{ event.external_url }}" target="new">
+                <h3>
+                  <a class="oldskool" href="{{ event.get_absolute_url }}">
                      {{ event.title }}
                   </a>
-                </h2>
-                <h3>
-                  {{ event.starts_at|date }} at {{ event.starts_at|time }}
                 </h3>
+                <h4>
+                  {{ event.starts_at|date }} at {{ event.starts_at|time }}
+                </h4>
               </div>
             </div>
 
@@ -64,54 +82,32 @@
 
         {% endfor %}
       </section>
-    {% endif %}
 
     {% if past_events %}
       <hr>
       <section>
         <h2>Past events at {{ venue.name }}</h2>
 
+        <ul>
         {% for event in past_events %}
+          <li>
+            <a oldskool href="{{ event.get_absolute_url }}" target="new">
+               {{ event.title }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
 
-          <a id="{{ event.slug }}"></a>
-
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <div class="panel-title">
-                <h3>
-                  <a class="oldskool" href="{{ event.external_url }}" target="new">
-                     {{ event.title }}
-                  </a>
-                </h3>
-
-                <h4>
-                  {{ event.starts_at|date }}
-                </h4>
-              </div>
-            </div>
-
-            <div class="panel-body">
-              {{ event.description|truncatewords:20 }}
-            </div>
-
-          </div>
-
-        {% endfor %}
-      </section
+      </section>
     {% endif %}
 
-    {% if not past_events and not previous_events %}
-      <p class="lead">
-      We don't know about any events at the moment.
-      </p>
 
-      {% if venue.website %}
-        <p>
-          <a class="oldskool" href="{{ venue.website }}" target="new">
-            Visit {{ venue.name}} website.
-          </a>
-        </p>
-      {% endif %}
+    {% if venue.website %}
+      <p>
+        <a class="oldskool" href="{{ venue.website }}" target="new">
+          Visit {{ venue.name}} website.
+        </a>
+      </p>
     {% endif %}
 
   </div>

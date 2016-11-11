@@ -107,3 +107,15 @@ section.venue-information .fa {
 section.embedded-map {
   padding-bottom: 20px;
 }
+
+section.venue-future-events .panel-title > h3 {
+  font-size: 22px;
+}
+
+section.venue-future-events .panel-title > h4 {
+  font-size: 16px;
+}
+
+section.venue-future-events a {
+  /* display: block;*/
+}
