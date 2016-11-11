@@ -240,7 +240,7 @@ class Event(models.Model):
         twitters = self.twitter_handles()
 
         TWEET_LENGTH = 140
-        URL_LENGTH = 23
+        URL_LENGTH = len('thinkingliverpool.com/e') + len(str(self.id))
 
         available_characters = TWEET_LENGTH - (
             URL_LENGTH + len(twitters) + len(when) + 3)
@@ -257,7 +257,7 @@ class Event(models.Model):
             title,
             when,
             twitters,
-            'thinkingliverpool.com',
+            'thinkingliverpool.com/e{}'.format(self.id),
         ]))
 
 
