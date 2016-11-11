@@ -39,7 +39,7 @@ def get_events_by_month():
             this_month_mid - (i * datetime.timedelta(days=30.5))
         ).replace(day=14)
 
-        if day.month < earliest_date.month:
+        if day < earliest_date:
             break  # finished!
 
         yield {
@@ -49,7 +49,8 @@ def get_events_by_month():
             'events': get_events_for(day.month, day.year)
         }
     else:
-        raise RuntimeError("This shouldn't happen")
+        raise RuntimeError("This shouldn't happen: we ierated past earliest "
+                           "date ({}).".format(earliest_date))
         pass
 
 
