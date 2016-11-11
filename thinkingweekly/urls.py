@@ -22,7 +22,7 @@ from django.views import static
 from django.contrib.sitemaps.views import sitemap
 
 from thinkingweekly.apps.events.sitemap import (
-    VenueSitemap, MonthYearSitemap
+    ViewSitemap, VenueSitemap, MonthYearSitemap
 )
 
 
@@ -33,6 +33,7 @@ from thinkingweekly.apps.events.sitemap import (
 # ^^ note that 5iwJyIPI is the created_at 20160714221816 in a new base
 
 sitemaps = {
+    'views': ViewSitemap,
     'venues': VenueSitemap,
     'month_year_pages': MonthYearSitemap,
 }
