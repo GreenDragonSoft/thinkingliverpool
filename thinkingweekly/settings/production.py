@@ -18,6 +18,7 @@ DATABASES = {'default': db_from_env}
 
 ALLOWED_HOSTS = [
     'www.thinkingliverpool.com',
+    'www-staging.thinkingliverpool.com',
     'thinkingweekly.herokuapp.com',
     'thinkingweekly-staging.herokuapp.com',
 ]
