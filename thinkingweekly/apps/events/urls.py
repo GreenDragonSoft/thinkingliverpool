@@ -15,6 +15,10 @@ urlpatterns = [
         views.SiteHome.as_view(),
         name='site_home'),
 
+    url(r'^e(?P<pk>\d+)/$',
+        views.RedirectToEvent.as_view(),
+        name='events.event_redirect'),
+
     url(r'^about-thinking-liverpool/$',
         views.About.as_view(),
         name='events.about'),

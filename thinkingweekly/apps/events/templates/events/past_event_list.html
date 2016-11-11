@@ -24,7 +24,7 @@
 
       <ul>
         {% for event in month.events %}
-        <li><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></li>
+        <li><a href="{{ event.get_past_url }}">{{ event.title }}</a></li>
         {% endfor %}
       </ul>
 
