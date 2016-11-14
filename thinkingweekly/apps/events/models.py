@@ -36,7 +36,7 @@ def get_events_by_month():
         timezone.now().date().replace(day=14)
     )
 
-    for i in range(1, 20 * 12):  # just-in-case limit to 20 years
+    for i in range(0, 20 * 12):  # just-in-case limit to 20 years
         day = (
             this_month_mid - (i * datetime.timedelta(days=30.5))
         ).replace(day=14)
