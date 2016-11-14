@@ -91,7 +91,7 @@
         <ul>
         {% for event in past_events %}
           <li>
-            <a oldskool href="{{ event.get_past_url }}" >
+            <a oldskool href="{{ event.get_absolute_url }}" >
                {{ event.title }}
             </a>
           </li>

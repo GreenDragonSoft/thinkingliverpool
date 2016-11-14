@@ -17,14 +17,13 @@
 
       {% for month in months %}
       <h2>
-        <a href="{% url "events.month_year_event_list" month=month.name year=month.year %}">
-          {{ month.name|title }} {{ month.year }}
-        </a>
+        <a id="{{ month.name }}-{{ month.year }}"></a>
+        {{ month.name|title }} {{ month.year }}
       </h2>
 
       <ul>
         {% for event in month.events %}
-        <li><a href="{{ event.get_past_url }}">{{ event.title }}</a></li>
+        <li><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></li>
         {% endfor %}
       </ul>
 

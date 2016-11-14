@@ -37,10 +37,7 @@ class RedirectToEvent(View):
     def get(self, request, *args, **kwargs):
         event = get_object_or_404(Event, id=kwargs['pk'])
 
-        if event.starts_at >= timezone.now():  # event is in the future
-            return redirect(event.get_future_url(), permanent=False)
-        else:
-            return redirect(event.get_past_url(), permanent=True)
+        return redirect(event.get_absolute_url(), permanent=True)
 
 
 class About(TemplateView):

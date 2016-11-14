@@ -206,19 +206,13 @@ class Event(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('events.event_redirect', kwargs={'pk': self.id})
-
-    def get_future_url(self):
-        return reverse('events.event_list') + '#{}'.format(self.slug)
-
-    def get_past_url(self):
         return reverse(
-            'events.month_year_event_list',
+            'events.event_detail',
             kwargs={
-                'month': self.starts_at.date().strftime('%B').lower(),
-                'year': self.starts_at.date().year
+                'pk': self.id,
+                'slug': self.slug
             }
-        ) + '#{}'.format(self.slug)
+        )
 
     def is_future(self):
         return self.starts_at.date() > timezone.today()
