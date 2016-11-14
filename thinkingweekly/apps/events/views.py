@@ -56,6 +56,12 @@ class EventList(ListView):
     ).select_related('venue')
 
 
+class EventDetail(DetailView):
+    model = Event
+    context_object_name = 'event'
+    template_name = "events/event_detail.html"
+
+
 class PastEventList(TemplateView):
     template_name = 'events/past_event_list.html'
 

@@ -1,6 +1,8 @@
 import datetime
 import re
 
+from urllib.parse import urlparse
+
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils import formats, timezone
@@ -218,6 +220,9 @@ class Event(models.Model):
             }
         ) + '#{}'.format(self.slug)
 
+    def is_future(self):
+        return self.starts_at.date() > timezone.today()
+
     def twitter_handles(self):
         handles = filter(None, [
             self.venue.twitter_handle,
@@ -231,6 +236,10 @@ class Event(models.Model):
                     if not (x.lower() in seen or seen.add(x.lower()))]
 
         return ' '.join(f7(handles))
+
+    def external_domain(self):
+        parsed_uri = urlparse(self.external_url)
+        return re.sub(r'^www\.', '', parsed_uri.netloc)
 
     def description_brief(self):
         return self.description[0:50] + '…'

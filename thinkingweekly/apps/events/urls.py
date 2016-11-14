@@ -19,6 +19,10 @@ urlpatterns = [
         views.RedirectToEvent.as_view(),
         name='events.event_redirect'),
 
+    url(r'^.+/e(?P<pk>\d+)/$',
+        views.EventDetail.as_view(),
+        name='events.event_detail'),
+
     url(r'^about-thinking-liverpool/$',
         views.About.as_view(),
         name='events.about'),
