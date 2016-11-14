@@ -66,28 +66,28 @@ class PastEventList(TemplateView):
         return {'months': get_events_by_month()}
 
 
-class MonthYearEventList(ListView):
-    model = Event
-    template_name = "events/month_year_event_list.html"
-    context_object_name = 'events'
+class TEMPORARYMonthYearEventList(View):
+    """
+    TEMPORARY
 
-    def get_queryset(self, *args, **kwargs):
+    This view just exists to smooth the deletion of URLs like
+    /whats-on-in-liverpool/december-2016/
+    """
+
+    def get(self, request, *args, **kwargs):
         month, year = self._get_month_year()
 
-        return Event.objects.filter(
-            starts_at__date__year=year,
-            starts_at__date__month=month
-        )
-
-    def get_context_data(self, *args, **kwargs):
-        ctx = super(MonthYearEventList, self).get_context_data(
-            *args, **kwargs)
-
-        ctx['month'] = self.kwargs['month'].capitalize()
-        ctx['year'] = int(self.kwargs['year'])
-
-        ctx['is_future'] = self.is_future()
-        return ctx
+        if self.is_future():
+            return redirect(
+                reverse('events.event_list'),
+                permanent=True,
+            )
+        else:
+            month, year = self.kwargs['month'], self.kwargs['year']
+            return redirect(
+                reverse('events.past_events') + '#{}-{}'.format(month, year),
+                permanent=True,
+            )
 
     def is_future(self):
         month, year = self._get_month_year()

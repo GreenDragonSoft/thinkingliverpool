@@ -37,7 +37,7 @@ urlpatterns = [
 
     url(r'^whats-on-in-liverpool/(?P<month>' + MONTH_PATTERN
         + ')-(?P<year>' + YEAR_PATTERN + ')/$',
-        views.MonthYearEventList.as_view(),
+        views.TEMPORARYMonthYearEventList.as_view(),
         name='events.month_year_event_list'),
 
     url(r'^whats-on-in-liverpool/(?P<slug>.+)/$',
