@@ -14,18 +14,18 @@
 
         {% if event.venue.slug %}
 
-        <span itemprop="location" itemscope itemtype="http://schema.org/Place">
+        <span itemprop="location" class="location" itemscope itemtype="http://schema.org/Place">
           <a itemprop="url" href="{% url "events.venue_event_list" slug=event.venue.slug %}">
-            <span itemprop="name">{{ event.venue.name }}</span>
+            <span itemprop="name" class="venue-name">{{ event.venue.name }}</span>
             <span itemprop="address" content="{{ event.venue.address }}"></span>
           </a>
         </span>
 
         {% else %}
 
-        <span itemprop="location" itemscope itemtype="http://schema.org/Place">
+        <span itemprop="location" class="location" itemscope itemtype="http://schema.org/Place">
           <a itemprop="url" href="{{ event.venue.map_url }}" title="{{ event.venue.address }}" target="new">
-            <span itemprop="name">{{ event.venue.name }}</span>
+            <span itemprop="name" class="venue-name">{{ event.venue.name }}</span>
             <span itemprop="address" content="{{ event.venue.address }}"></span>
           </a>
         </span>
@@ -39,6 +39,8 @@
     </div>
 
     <time itemProp="endDate" content="{{ event.starts_at|date:"Y-m-d" }}"></time>
+
+    <a class="btn btn-default" href="{{ event.external_url }}" target="new">View on {{ event.external_domain }}</a>
   </div>
 
 {% endfor %}
