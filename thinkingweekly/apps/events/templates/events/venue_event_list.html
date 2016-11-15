@@ -14,16 +14,19 @@
 {% block content %}
 
   <div class="container">
-    <h1>What's on at {{ venue.name }}</h1>
+
+    <div itemscope itemtype="http://schema.org/Place">
+
+      <h1>What's on at <span itemprop="name">{{ venue.name }}</span></h1>
 
       <section class="venue-information">
         <span class="venue-information-snippet">
-          <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>&nbsp;<a href="{{ venue.map_url }}" target="new">{{ venue.address }}</a>
+          <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>&nbsp;<a href="{{ venue.map_url }}" target="new"><span itemprop="address">{{ venue.address }}</span></a>
         </span>
 
         {% if venue.website %}
         <span class="venue-information-snippet">
-          <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<a href="{{ venue.website }}" target="new">{{ venue.website }}</a>
+          <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<a itemprop="url" href="{{ venue.website }}" target="new">{{ venue.website }}</a>
         </span>
         {% endif %}
 
@@ -83,33 +86,34 @@
         {% endfor %}
       </section>
 
-    {% if past_events %}
-      <hr>
-      <section>
-        <h2>Past events</h2>
+      {% if past_events %}
+        <hr>
+        <section>
+          <h2>Past events</h2>
 
-        <ul>
-        {% for event in past_events %}
-          <li>
-            <a oldskool href="{{ event.get_absolute_url }}" >
-               {{ event.title }}
-            </a>
-          </li>
-          {% endfor %}
-        </ul>
+          <ul>
+          {% for event in past_events %}
+            <li>
+              <a oldskool href="{{ event.get_absolute_url }}" >
+                 {{ event.title }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
 
-      </section>
-    {% endif %}
+        </section>
+      {% endif %}
 
 
-    {% if venue.website %}
-      <p>
-        <a class="oldskool" href="{{ venue.website }}" target="new">
-          Visit {{ venue.name}} website.
-        </a>
-      </p>
-    {% endif %}
+      {% if venue.website %}
+        <p>
+          <a class="oldskool" href="{{ venue.website }}" target="new">
+            Visit {{ venue.name}} website.
+          </a>
+        </p>
+      {% endif %}
 
+    </div>
   </div>
 
 {% endblock %}
