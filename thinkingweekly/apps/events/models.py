@@ -205,6 +205,9 @@ class Event(models.Model):
     def __str__(self):
         return self.title
 
+    def get_future_url(self):
+        return reverse('events.event_list') + '#{}'.format(self.slug)
+
     def get_absolute_url(self):
         return reverse(
             'events.event_detail',
