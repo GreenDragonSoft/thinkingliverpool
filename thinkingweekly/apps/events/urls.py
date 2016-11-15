@@ -19,7 +19,7 @@ urlpatterns = [
         views.RedirectToEvent.as_view(),
         name='events.event_redirect'),
 
-    url(r'^(?P<slug>.+)/e(?P<pk>\d+)/$',
+    url(r'^event/(?P<year>' + YEAR_PATTERN + ')/(?P<slug>.+)/e(?P<pk>\d+)/$',
         views.EventDetail.as_view(),
         name='events.event_detail'),
 

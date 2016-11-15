@@ -213,7 +213,8 @@ class Event(models.Model):
             'events.event_detail',
             kwargs={
                 'pk': self.id,
-                'slug': self.slug
+                'slug': self.slug,
+                'year': self.starts_at.date().year,
             }
         )
 
