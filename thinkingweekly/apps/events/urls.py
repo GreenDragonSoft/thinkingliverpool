@@ -19,6 +19,10 @@ urlpatterns = [
         views.RedirectToEvent.as_view(),
         name='events.event_redirect'),
 
+    url(r'^event/(?P<year>' + YEAR_PATTERN + ')/(?P<slug>.+)/e(?P<pk>\d+)/$',
+        views.EventDetail.as_view(),
+        name='events.event_detail'),
+
     url(r'^about-thinking-liverpool/$',
         views.About.as_view(),
         name='events.about'),
@@ -33,7 +37,7 @@ urlpatterns = [
 
     url(r'^whats-on-in-liverpool/(?P<month>' + MONTH_PATTERN
         + ')-(?P<year>' + YEAR_PATTERN + ')/$',
-        views.MonthYearEventList.as_view(),
+        views.TEMPORARYMonthYearEventList.as_view(),
         name='events.month_year_event_list'),
 
     url(r'^whats-on-in-liverpool/(?P<slug>.+)/$',

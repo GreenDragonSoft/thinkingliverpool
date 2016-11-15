@@ -41,7 +41,7 @@
 
       <div class="row">
         <div class="col-md-12">
-          <a href="{{ next_event.get_absolute_url }}">
+          <a href="{{ next_event.get_future_url }}">
             <div class="well">
               <h3>{{ next_event.title }}</h3>
               <h4>{{ next_event.starts_at|date }} at {{ next_event.starts_at|time }}</h4>

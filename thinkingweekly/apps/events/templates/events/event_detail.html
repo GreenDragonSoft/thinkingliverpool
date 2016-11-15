@@ -1,0 +1,77 @@
+{% extends "thinkingweekly/base.html" %}
+
+{% if event.is_future %}
+  {% block extra_head %}
+    <!--
+    This event is in the future, so its primary location is the future page,
+    /whats-on-in-liverpool/
+
+    Until the event drops off that page, don't allow indexing in search engines.
+    -->
+    {% include "events/partials/meta_noindex.html" %}
+  {% endblock %}
+{% endif %}
+
+{% block title %}
+<title>{{ event.title }}</title>
+{% endblock %}
+
+{% block description %}
+<meta name="description" content="{{ event.description }}">
+{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+
+    <div class="event-detail" itemscope itemtype="http://schema.org/Event">
+      <a id="{{ event.slug }}"></a>
+
+      <h1 class="event-title">
+        <span itemprop="name">{{ event.title }}</span>
+      </h1>
+
+      <h2 class="starts-at">
+        <time itemprop="startDate" datetime="{{ event.starts_at|date:"Y-m-d\TG:i:s" }}">{{ event.starts_at|date }}, {{ event.starts_at|time }}</time>
+      </h2>
+
+      <h2 class="venue-name">
+        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+
+        {% if event.venue.slug %}
+
+        <span itemprop="location" itemscope itemtype="http://schema.org/Place">
+          <a itemprop="url" href="{% url "events.venue_event_list" slug=event.venue.slug %}">
+            <span itemprop="name">{{ event.venue.name }}</span>
+            <span itemprop="address" content="{{ event.venue.address }}"></span>
+          </a>
+        </span>
+
+        {% else %}
+
+        <span itemprop="location" itemscope itemtype="http://schema.org/Place">
+          <a itemprop="url" href="{{ event.venue.map_url }}" title="{{ event.venue.address }}" target="new">
+            <span itemprop="name">{{ event.venue.name }}</span>
+            <span itemprop="address" content="{{ event.venue.address }}"></span>
+          </a>
+        </span>
+
+        {% endif %}
+
+      </h2>
+
+      <div class="description" itemprop="description">
+        {{ event.description|linebreaks }}
+      </div>
+
+      <p class="lead">
+        <a itemprop="url" class="btn btn-primary" href="{{ event.external_url }}">View on {{ event.external_domain }}</a>
+        <a class="btn btn-default" href="{% url "events.event_list" %}">See What's On in Liverpool</a>
+      </p>
+
+      <time itemProp="endDate" content="{{ event.starts_at|date:"Y-m-d" }}"></time>
+    </div>
+
+  </div>
+
+{% endblock %}

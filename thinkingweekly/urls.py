@@ -22,7 +22,7 @@ from django.views import static
 from django.contrib.sitemaps.views import sitemap
 
 from thinkingweekly.apps.events.sitemap import (
-    ViewSitemap, VenueSitemap, MonthYearSitemap
+    ViewSitemap, VenueSitemap, PastEventSitemap
 )
 
 
@@ -35,7 +35,7 @@ from thinkingweekly.apps.events.sitemap import (
 sitemaps = {
     'views': ViewSitemap,
     'venues': VenueSitemap,
-    'month_year_pages': MonthYearSitemap,
+    'past_events': PastEventSitemap,
 }
 
 urlpatterns = [

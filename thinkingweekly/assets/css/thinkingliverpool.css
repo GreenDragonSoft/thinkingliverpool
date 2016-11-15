@@ -40,7 +40,7 @@ div.subscribe-form {
   margin-bottom:  20px;
 }
 
-a.oldskool, div.event a {
+a.oldskool, div.event h2 > a, div.event .location > a {
   color: inherit;
   text-decoration: underline;
 }
@@ -118,4 +118,22 @@ section.venue-future-events .panel-title > h4 {
 
 section.venue-future-events a {
   /* display: block;*/
+}
+
+/* Event detail page */
+
+.event-detail .event-title {
+  font-size: 36px;
+}
+
+.event-detail .starts-at {
+  font-size: 24px;
+}
+
+.event-detail .venue-name {
+  font-size: 24px;
+}
+
+.event-detail .description {
+  padding-bottom: 20px;
 }

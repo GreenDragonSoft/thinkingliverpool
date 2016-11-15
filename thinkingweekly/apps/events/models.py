@@ -1,6 +1,8 @@
 import datetime
 import re
 
+from urllib.parse import urlparse
+
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils import formats, timezone
@@ -34,7 +36,7 @@ def get_events_by_month():
         timezone.now().date().replace(day=14)
     )
 
-    for i in range(1, 20 * 12):  # just-in-case limit to 20 years
+    for i in range(0, 20 * 12):  # just-in-case limit to 20 years
         day = (
             this_month_mid - (i * datetime.timedelta(days=30.5))
         ).replace(day=14)
@@ -203,20 +205,21 @@ class Event(models.Model):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
-        return reverse('events.event_redirect', kwargs={'pk': self.id})
-
     def get_future_url(self):
         return reverse('events.event_list') + '#{}'.format(self.slug)
 
-    def get_past_url(self):
+    def get_absolute_url(self):
         return reverse(
-            'events.month_year_event_list',
+            'events.event_detail',
             kwargs={
-                'month': self.starts_at.date().strftime('%B').lower(),
-                'year': self.starts_at.date().year
+                'pk': self.id,
+                'slug': self.slug,
+                'year': self.starts_at.date().year,
             }
-        ) + '#{}'.format(self.slug)
+        )
+
+    def is_future(self):
+        return self.starts_at.date() > timezone.today()
 
     def twitter_handles(self):
         handles = filter(None, [
@@ -231,6 +234,10 @@ class Event(models.Model):
                     if not (x.lower() in seen or seen.add(x.lower()))]
 
         return ' '.join(f7(handles))
+
+    def external_domain(self):
+        parsed_uri = urlparse(self.external_url)
+        return re.sub(r'^www\.', '', parsed_uri.netloc)
 
     def description_brief(self):
         return self.description[0:50] + '…'

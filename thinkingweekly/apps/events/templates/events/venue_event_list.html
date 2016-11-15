@@ -45,7 +45,7 @@
 
       <hr>
       <section class="venue-future-events">
-        <h2>Future events at {{ venue.name }}</h2>
+        <h2>Future events</h2>
 
         {% if not future_events %}
         <p class="lead">
@@ -86,12 +86,12 @@
     {% if past_events %}
       <hr>
       <section>
-        <h2>Past events at {{ venue.name }}</h2>
+        <h2>Past events</h2>
 
         <ul>
         {% for event in past_events %}
           <li>
-            <a oldskool href="{{ event.get_past_url }}" >
+            <a oldskool href="{{ event.get_absolute_url }}" >
                {{ event.title }}
             </a>
           </li>

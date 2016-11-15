@@ -1,7 +1,10 @@
+import datetime
+
 from django.contrib.sitemaps import Sitemap
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 
-from .models import Venue, get_events_by_month
+from .models import Venue, Event
 
 
 class ViewSitemap(Sitemap):
@@ -40,23 +43,45 @@ class ViewSitemap(Sitemap):
         return item.get('priority', 0.5)
 
 
-class MonthYearSitemap(Sitemap):
+class PastEventSitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.5
 
     def items(self):
-        return [
-            (x['name'], x['year'])
-            for x in get_events_by_month()
-        ]
+        return Event.objects.exclude(
+            starts_at__date__gte=timezone.now().date()
+        )
 
-    def location(self, month_year_tuple):
-        month, year = month_year_tuple
+    def priority(self, event):
+        if self._up_to_one_week_old(event):
+            return 1.0
+        else:
+            return 0.5
 
-        return reverse('events.month_year_event_list', kwargs={
-            'month': month,
-            'year': year,
-        })
+    def changefreq(self, event):
+        if self._up_to_one_week_old(event):
+            return 'daily'
+
+        elif self._one_week_to_one_month_old(event):
+            return 'weekly'
+
+        else:
+            return 'monthly'
+
+    @staticmethod
+    def _up_to_one_week_old(event):
+        return (
+            PastEventSitemap._get_event_age(event) < datetime.timedelta(days=7)
+        )
+
+    @staticmethod
+    def _one_week_to_one_month_old(event):
+        age = PastEventSitemap._get_event_age(event)
+        return datetime.timedelta(days=7) <= age < datetime.timedelta(days=30)
+
+    @staticmethod
+    def _get_event_age(event):
+        return timezone.now() - event.starts_at
 
 
 class VenueSitemap(Sitemap):
