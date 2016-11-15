@@ -4,7 +4,7 @@
     <a id="{{ event.slug }}"></a>
 
     <h2 class="section-heading">
-      <a itemprop="url" href="{{ event.external_url }}" target="new">
+      <a itemprop="url" href="{{ event.get_absolute_url }}">
         <span itemprop="name">{{ event.title }}</span>
       </a>
     </h2>
@@ -40,7 +40,7 @@
 
     <time itemProp="endDate" content="{{ event.starts_at|date:"Y-m-d" }}"></time>
 
-    <a class="btn btn-default" href="{{ event.external_url }}" target="new">View on {{ event.external_domain }}</a>
+    <a class="btn btn-primary" href="{{ event.external_url }}" target="new">View on {{ event.external_domain }}</a>
   </div>
 
 {% endfor %}
