@@ -1,5 +1,8 @@
 import calendar
 import datetime
+import re
+
+from icalendar import Calendar, Event as icalEvent
 
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404, redirect
@@ -8,6 +11,9 @@ from django.views.generic.base import View
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.utils import timezone
+from django.http import HttpResponse
+
+from django.contrib.sites.models import Site
 
 from .models import Event, Update, Venue, get_events_by_month
 
@@ -149,3 +155,55 @@ class UpdateEmailPreview(DetailView):
             *args, **kwargs)
         ctx['events'] = self.object.events
         return ctx
+
+
+class CalendarView(View):
+    def get(self, request, *args, **kwargs):
+        response = HttpResponse(
+            self._make_ical(request),
+            content_type='text/calendar'
+        )
+        response['Content-Disposition'] = (
+            'attachment; filename="thinkingliverpool_{}.ics"'.format(
+                timezone.now().date().isoformat()
+            )
+        )
+        return response
+
+    def _make_ical(self, request):
+        one_month_ago = timezone.now() - datetime.timedelta(days=30)
+
+        cal = Calendar()
+        cal.add('prodid', '-//thinkingliverpool.com/calendar//EN')
+        cal.add('version', '2.0')
+        cal.add('X-WR-CALNAME', 'Thinking Liverpool')
+        cal.add('X-WR-CALDESC', 'Events from www.thinkingliverpool.com')
+        cal.add('X-WR-TIMEZONE', 'Europe/London')
+
+        domain = re.sub('^www\.', '', Site.objects.get_current().domain)
+
+        for event in Event.objects.filter(starts_at__gte=one_month_ago):
+            event_url = request.build_absolute_uri(
+                reverse('events.event_redirect', kwargs={'pk': event.id}))
+
+            html_description = (
+                '<a href="{url}">{shorter_url}</a>\n\n{desc}'.format(
+                    url=event_url,
+                    shorter_url=re.sub('^https?://www\.', '', event_url),
+                    desc=event.description)
+            )
+
+            ical_event = icalEvent()
+            ical_event.add('dtstamp', timezone.now())
+            ical_event.add('created', event.created_at)
+            ical_event.add('last-modified', event.updated_at)
+            ical_event.add('uid', 'e{id}@{domain}'.format(
+                id=event.id, domain=domain))
+            ical_event.add('summary', event.title)
+            ical_event.add('description', html_description)
+            ical_event.add('X-ALT-DESC', html_description)
+            ical_event.add('dtstart', event.starts_at)
+            ical_event.add('location', event.venue.map_query)
+            ical_event.add('url', event_url)
+            cal.add_component(ical_event)
+        return cal.to_ical()
