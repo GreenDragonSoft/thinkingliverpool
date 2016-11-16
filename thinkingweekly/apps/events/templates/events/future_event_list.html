@@ -4,6 +4,10 @@
 <title>What's On In Liverpool | Thinking Liverpool</title>
 {% endblock %}
 
+{% block extra_head %}
+    <link rel="alternate" type="text/calendar" title="iCalendar (ics) for thinkingliverpool.com" href="{% url "events.calendar" %}" />
+{% endblock %}
+
 {% block description %}
 <meta name="description" content="Find out what interesting events are going on in Liverpool. Never miss out by signing up to our weekly newsletter. Stay in the know about upcoming events!">
 {% endblock %}
