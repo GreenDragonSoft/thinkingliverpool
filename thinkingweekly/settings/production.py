@@ -12,6 +12,9 @@ except KeyError:
         "variable. If you're _definitely not_ running in production it's safe "
         "to set this to something insecure, eg `export SECRET_KEY=foo`")
 
+# https://docs.djangoproject.com/en/1.8/ref/settings/#secure-ssl-redirect
+SECURE_SSL_REDIRECT = True
+
 # Set database config from $DATABASE_URL.
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES = {'default': db_from_env}
