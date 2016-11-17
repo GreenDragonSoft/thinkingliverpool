@@ -41,7 +41,7 @@
         {{ event.description|linebreaks }}
       </div>
 
-      <time itemProp="endDate" content="{{ event.starts_at|date:"Y-m-d" }}"></time>
+      <time itemProp="endDate" datetime="{{ event.starts_at|date:"Y-m-d" }}"></time>
 
       <a class="btn btn-primary" href="{{ event.external_url }}" target="new">View on {{ event.external_domain }}</a>
     </div>
