@@ -48,5 +48,9 @@ urlpatterns = [
         views.UpdateEmailPreview.as_view(),
         name='events.update_email_preview'),
 
+    url(r'^calendar/$',
+        views.CalendarView.as_view(),
+        name='events.calendar'),
+
     # url(r'feed/rss/$', UpdateFeed()),
 ]
