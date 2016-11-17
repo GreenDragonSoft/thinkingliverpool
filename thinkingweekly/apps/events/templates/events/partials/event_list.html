@@ -1,46 +1,50 @@
 {% for event in events %}
 
-  <div class="event" itemscope itemtype="http://schema.org/Event">
+  <div class="event panel panel-default" itemscope itemtype="http://schema.org/Event">
     <a id="{{ event.slug }}"></a>
 
-    <h2 class="section-heading">
-      <a itemprop="url" href="{{ event.get_absolute_url }}">
-        <span itemprop="name">{{ event.title }}</span>
-      </a>
-    </h2>
-
-    <h3>
-      <time itemprop="startDate" datetime="{{ event.starts_at|date:"Y-m-d\TG:i:s" }}">{{ event.starts_at|date }}, {{ event.starts_at|time }}</time> at
-
-        {% if event.venue.slug %}
-
-        <span itemprop="location" class="location" itemscope itemtype="http://schema.org/Place">
-          <a itemprop="url" href="{% url "events.venue_event_list" slug=event.venue.slug %}">
-            <span itemprop="name" class="venue-name">{{ event.venue.name }}</span>
-            <span itemprop="address" content="{{ event.venue.address }}"></span>
-          </a>
-        </span>
-
-        {% else %}
-
-        <span itemprop="location" class="location" itemscope itemtype="http://schema.org/Place">
-          <a itemprop="url" href="{{ event.venue.map_url }}" title="{{ event.venue.address }}" target="new">
-            <span itemprop="name" class="venue-name">{{ event.venue.name }}</span>
-            <span itemprop="address" content="{{ event.venue.address }}"></span>
-          </a>
-        </span>
-
-        {% endif %}
-
-    </h3>
-
-    <div itemprop="description">
-      {{ event.description|linebreaks }}
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        <a itemprop="url" href="{{ event.get_absolute_url }}">
+          <span itemprop="name">{{ event.title }}</span>
+        </a>
+      </h2>
     </div>
 
-    <time itemProp="endDate" content="{{ event.starts_at|date:"Y-m-d" }}"></time>
+    <div class="panel-body">
+      <h3>
+        <time itemprop="startDate" datetime="{{ event.starts_at|date:"Y-m-d\TG:i:s" }}">{{ event.starts_at|date }}, {{ event.starts_at|time }}</time> at
 
-    <a class="btn btn-primary" href="{{ event.external_url }}" target="new">View on {{ event.external_domain }}</a>
+          {% if event.venue.slug %}
+
+          <span itemprop="location" class="location" itemscope itemtype="http://schema.org/Place">
+            <a itemprop="url" href="{% url "events.venue_event_list" slug=event.venue.slug %}">
+              <span itemprop="name" class="venue-name">{{ event.venue.name }}</span>
+              <span itemprop="address" content="{{ event.venue.address }}"></span>
+            </a>
+          </span>
+
+          {% else %}
+
+          <span itemprop="location" class="location" itemscope itemtype="http://schema.org/Place">
+            <a itemprop="url" href="{{ event.venue.map_url }}" title="{{ event.venue.address }}" target="new">
+              <span itemprop="name" class="venue-name">{{ event.venue.name }}</span>
+              <span itemprop="address" content="{{ event.venue.address }}"></span>
+            </a>
+          </span>
+
+          {% endif %}
+
+      </h3>
+
+      <div itemprop="description">
+        {{ event.description|linebreaks }}
+      </div>
+
+      <time itemProp="endDate" datetime="{{ event.starts_at|date:"Y-m-d" }}"></time>
+
+      <a class="btn btn-primary" href="{{ event.external_url }}" target="new">View on {{ event.external_domain }}</a>
+    </div>
   </div>
 
 {% endfor %}
