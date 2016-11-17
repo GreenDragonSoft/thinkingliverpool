@@ -5,7 +5,7 @@
   height: 100%;
   height: calc(100% - 1px);
 */
-  background-image: url('../img/banner-bg.jpg');
+  background-image: url('../img/thinking-liverpool-whats-on.jpg');
   background-size: cover;
 }
 
@@ -22,17 +22,19 @@ h1.explainer {
 }
 
 .site-home-banner .jumbotron {
-  background-color:  rgba(247,247,247, 0.4);
+  background-color:  rgba(247,247,247, 0.8);
 }
 
 .site-home-banner .jumbotron h2 {
   font-size: 28px;
+  color: rgb(69, 130, 236);
 }
 
 .site-home-banner .jumbotron li {
   background: none;
   border: none;
-  color: white;
+  color: rgb(69, 130, 236);
+  font-weight: bold;
 }
 
 div.subscribe-form {
