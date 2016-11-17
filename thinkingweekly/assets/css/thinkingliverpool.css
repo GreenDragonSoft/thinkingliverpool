@@ -43,15 +43,24 @@ div.subscribe-form {
 }
 
 a.oldskool,
-div.event h2 > a,
-div.event .location > a,
 p.copyright a {
   color: inherit;
   text-decoration: underline;
 }
 
+/* ==== Future Events: /whats-on-in-liverpool/ ==== */
+
+.event h2.panel-title {
+  font-size: 24px;
+}
+
 .event h3 {
-  font-size: 20px;
+  font-size: 18px;
+  margin-top: 0px;
+}
+
+.event span > a {
+  color: inherit;
 }
 
 p.more-events-next-week {
@@ -63,6 +72,8 @@ p.more-events-next-week {
 p.see-future-events {
   font-size: 24px;
 }
+
+/* ==== Past events: /whats-on-in-liverpool/past-events/ ==== */
 
 .past-event-updates > h2 > a {
   font-size: 24px;
