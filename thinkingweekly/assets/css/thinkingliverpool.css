@@ -40,7 +40,10 @@ div.subscribe-form {
   margin-bottom:  20px;
 }
 
-a.oldskool, div.event h2 > a, div.event .location > a {
+a.oldskool,
+div.event h2 > a,
+div.event .location > a,
+p.copyright a {
   color: inherit;
   text-decoration: underline;
 }
