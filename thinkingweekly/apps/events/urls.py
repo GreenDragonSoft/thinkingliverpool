@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.views.generic import TemplateView
 from . import views
 # from .feeds import UpdateFeed
 
@@ -22,6 +23,10 @@ urlpatterns = [
     url(r'^event/(?P<year>' + YEAR_PATTERN + ')/(?P<slug>.+)/e(?P<pk>\d+)/$',
         views.EventDetail.as_view(),
         name='events.event_detail'),
+
+    url(r'^sign-up-thanks/$',
+        TemplateView.as_view(template_name='events/sign_up_thanks.html'),
+        name='events.sign_up_thanks'),
 
     url(r'^about/$',
         views.About.as_view(),

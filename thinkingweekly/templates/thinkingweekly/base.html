@@ -138,8 +138,10 @@ p { margin: 0px 0px 11px; }
 
             <div class="row">
                 <div class="col-lg-8">
+                  {% block footer_newsletter %}
                     <h2>Keep up to date</h2>
                     {% include "events/partials/subscribe_form.html" %}
+                  {% endblock %}
                 </div>
                 <div class="col-lg-4">
                     <ul class="list-inline banner-social-buttons">
