@@ -23,7 +23,7 @@ urlpatterns = [
         views.EventDetail.as_view(),
         name='events.event_detail'),
 
-    url(r'^about-thinking-liverpool/$',
+    url(r'^about/$',
         views.About.as_view(),
         name='events.about'),
 
