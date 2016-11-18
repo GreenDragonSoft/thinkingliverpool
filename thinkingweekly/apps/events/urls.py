@@ -28,6 +28,10 @@ urlpatterns = [
         TemplateView.as_view(template_name='events/sign_up_thanks.html'),
         name='events.sign_up_thanks'),
 
+    url(r'^privacy/$',
+        TemplateView.as_view(template_name='events/privacy.html'),
+        name='events.privacy'),
+
     url(r'^about/$',
         views.About.as_view(),
         name='events.about'),
