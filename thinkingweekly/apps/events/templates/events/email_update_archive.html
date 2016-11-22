@@ -1,0 +1,39 @@
+{% extends "thinkingweekly/base.html" %}
+
+
+{% block extra_head %}
+  <!-- This isn't for search engines -->
+  {% include "events/partials/meta_noindex.html" %}
+{% endblock %}
+
+{% block title %}
+<title>Events from {{ update.start_date|date }} | Thinking Liverpool</title>
+{% endblock %}
+
+{% block description %}
+<meta name="description" content="">
+{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+    <h1>Update for {{ update.start_date|date }}</h1>
+
+    <div class="well">
+      <p class="lead">
+        This is an online archive of our weekly newsletter.
+      </p>
+      <p class="lead">
+        Don't miss out - sign up to receive a carefully filtered list of events
+        each week.
+      </p>
+
+      {% include "events/partials/subscribe_form.html" %}
+    </div>
+
+
+    {% include "events/partials/event_list.html" with events=events only %}
+
+  </div>
+
+{% endblock %}

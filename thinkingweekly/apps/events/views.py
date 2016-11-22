@@ -157,6 +157,10 @@ class UpdateEmailPreview(DetailView):
         return ctx
 
 
+class EmailUpdateArchive(UpdateEmailPreview):
+    template_name = "events/email_update_archive.html"
+
+
 class CalendarView(View):
     def get(self, request, *args, **kwargs):
         response = HttpResponse(
