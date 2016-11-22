@@ -57,6 +57,10 @@ urlpatterns = [
         views.UpdateEmailPreview.as_view(),
         name='events.update_email_preview'),
 
+    url(r'^update/(?P<date>' + DATE_PATTERN + ')/$',
+        views.EmailUpdateArchive.as_view(),
+        name='events.email_update_archive'),
+
     url(r'^calendar/$',
         views.CalendarView.as_view(),
         name='events.calendar'),

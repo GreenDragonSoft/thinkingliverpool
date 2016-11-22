@@ -4,6 +4,7 @@ import re
 from urllib.parse import urlparse
 
 from django.db import models
+from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.utils import formats, timezone
 from django.utils.http import urlquote_plus
@@ -318,8 +319,24 @@ class Update(models.Model):
     def number_of_events(self):
         return self.events.count()
 
-    def get_absolute_url(self):
+    def get_url(self):
+        """
+        Return the (actual) absolute URL, with protocol & domain.
+        https://code.djangoproject.com/wiki/ReplacingGetAbsoluteUrl
+        """
+        domain = Site.objects.get_current().domain
+
+        return 'https://{}{}'.format(domain, self.get_url_path())
+
+    def get_url_path(self):
         return reverse(
-            'events.weekly_update_event_list',
+            'events.email_update_archive',
             kwargs={'date': self.start_date}
         )
+
+    def get_absolute_url(self):
+        """
+        Bad name (https://code.djangoproject.com/wiki/ReplacingGetAbsoluteUrl)
+        Return the url path.
+        """
+        return self.get_url_path()

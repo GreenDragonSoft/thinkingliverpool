@@ -14,7 +14,7 @@ def send_update_by_email(update):
         'events/email/weekly_update.html'
     )
 
-    body = body_template.render({'events': update.events})
+    body = body_template.render({'update': update})
     subject = subject_template.render(
         {'date': update.start_date}
     ).strip('\r\n')
