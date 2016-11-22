@@ -38,7 +38,6 @@ class SiteHome(TemplateView):
 
 
 class RedirectToEvent(View):
-    model = Event
 
     def get(self, request, *args, **kwargs):
         event = get_object_or_404(Event, id=kwargs['pk'])
