@@ -150,12 +150,6 @@ class UpdateEmailPreview(DetailView):
     def get_object(self):
         return Update.objects.get(start_date=self.kwargs['date'])
 
-    def get_context_data(self, *args, **kwargs):
-        ctx = super(UpdateEmailPreview, self).get_context_data(
-            *args, **kwargs)
-        ctx['events'] = self.object.events
-        return ctx
-
 
 class EmailUpdateArchive(UpdateEmailPreview):
     template_name = "events/email_update_archive.html"
