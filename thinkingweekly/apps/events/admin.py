@@ -75,6 +75,7 @@ class EventAdmin(admin.ModelAdmin):
         'title',
         'description_brief',
         'venue',
+        'event_image',
         'slug',
     )
 

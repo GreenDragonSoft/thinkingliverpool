@@ -1,5 +1,7 @@
 import datetime
+import os
 import re
+import uuid
 
 from urllib.parse import urlparse
 
@@ -10,6 +12,7 @@ from django.utils import formats, timezone
 from django.utils.http import urlquote_plus
 
 from autoslug import AutoSlugField
+from versatileimagefield.fields import VersatileImageField
 
 
 def calculate_venue_sort_name(venue_name):
@@ -55,6 +58,18 @@ def get_events_by_month():
         raise RuntimeError("This shouldn't happen: we ierated past earliest "
                            "date ({}).".format(earliest_date))
         pass
+
+
+def make_event_image_filename(instance, filename):
+    if instance.pk:
+        name = 'e{pk}-{slug}'.format(pk=instance.pk, slug=instance.slug)
+    else:
+        name = 'unknown-{}'.format(uuid.uuid4())
+
+    return 'event_images/{name}{extension}'.format(
+        name=name,
+        extension=os.path.splitext(filename)[1]
+    )
 
 
 class Venue(models.Model):
@@ -150,8 +165,6 @@ class Event(models.Model):
     class Meta:
         ordering = ['starts_at']
 
-    title = models.CharField(max_length=100)
-
     id = models.AutoField(primary_key=True)
     slug = AutoSlugField(populate_from='title')
 
@@ -169,10 +182,20 @@ class Event(models.Model):
         ),
     )
 
+    title = models.CharField(max_length=100)
+
     starts_at = models.DateTimeField(
         help_text=(
             'The time the event starts, or if it says to arrive early, then '
             'the arrival time'
+        )
+    )
+
+    external_image_url = models.URLField(
+        null=True,
+        blank=True,
+        help_text=(
+            'This should be an image which would complement the event listing.'
         )
     )
 
@@ -198,6 +221,16 @@ class Event(models.Model):
     )
 
     description = models.TextField()
+
+    event_image = VersatileImageField(
+        null=True,
+        blank=True,
+        upload_to=make_event_image_filename,
+        help_text=(
+            'By default, this will be automatically downloaded from the '
+            'external_image_url field.'
+        )
+    )
 
     have_posted_facebook = models.BooleanField(default=False)
 
