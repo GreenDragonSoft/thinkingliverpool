@@ -150,8 +150,6 @@ class Event(models.Model):
     class Meta:
         ordering = ['starts_at']
 
-    title = models.CharField(max_length=100)
-
     id = models.AutoField(primary_key=True)
     slug = AutoSlugField(populate_from='title')
 
@@ -168,6 +166,8 @@ class Event(models.Model):
             'like the website of the organisation.'
         ),
     )
+
+    title = models.CharField(max_length=100)
 
     starts_at = models.DateTimeField(
         help_text=(
