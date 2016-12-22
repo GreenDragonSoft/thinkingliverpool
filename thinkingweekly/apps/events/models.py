@@ -176,6 +176,14 @@ class Event(models.Model):
         )
     )
 
+    external_image_url = models.URLField(
+        null=True,
+        blank=True,
+        help_text=(
+            'This should be an image which would complement the event listing.'
+        )
+    )
+
     venue = models.ForeignKey('Venue', related_name='events')
 
     organiser = models.ForeignKey(
