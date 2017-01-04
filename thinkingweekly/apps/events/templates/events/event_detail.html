@@ -1,7 +1,8 @@
 {% extends "thinkingweekly/base.html" %}
 
-{% if event.is_future %}
-  {% block extra_head %}
+{% block extra_head %}
+
+  {% if event.is_future %}
     <!--
     This event is in the future, so its primary location is the future page,
     /whats-on-in-liverpool/
@@ -9,8 +10,19 @@
     Until the event drops off that page, don't allow indexing in search engines.
     -->
     {% include "events/partials/meta_noindex.html" %}
-  {% endblock %}
-{% endif %}
+  {% endif %}
+
+
+  <meta property="og:type"        content="article" />
+  <meta property="og:url"         content="{{ event.get_url }}" />
+  <meta property="og:title"       content="{{ event.title }}" />
+  <meta property="og:description" content="{{ event.description }}" />
+
+  {% if event.event_image %}
+  <meta property="og:image"       content="{{ event.event_image }}" />
+  {% endif %}
+
+{% endblock %}
 
 {% block title %}
 <title>{{ event.title }}</title>
