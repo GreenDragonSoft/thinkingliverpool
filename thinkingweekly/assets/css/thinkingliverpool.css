@@ -42,6 +42,10 @@ div.subscribe-form {
   margin-bottom:  20px;
 }
 
+p.copyright {
+  text-align: center;
+}
+
 a.oldskool,
 p.copyright a {
   color: inherit;

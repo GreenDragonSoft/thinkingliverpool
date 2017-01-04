@@ -20,58 +20,90 @@
 <meta name="description" content="{{ event.description }}">
 {% endblock %}
 
+{% block banner %}
+{% endblock %}
+
 {% block content %}
 
   <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
 
-    <div class="event-detail" itemscope itemtype="http://schema.org/Event">
-      <a id="{{ event.slug }}"></a>
+        <div class="row">
 
-      <h1 class="event-title">
-        <span itemprop="name">{{ event.title }}</span>
-      </h1>
+          {% if event.event_image %}
+          <div class="col-md-7">
+          {% else %}
+          <div class="col-md-12"><!-- no image, make title section full width -->
+          {% endif %}
 
-      <h2 class="starts-at">
-        <time itemprop="startDate" datetime="{{ event.starts_at|date:"Y-m-d\TG:i:s" }}">{{ event.starts_at|date }}, {{ event.starts_at|time }}</time>
-      </h2>
+            <div class="event-detail" itemscope itemtype="http://schema.org/Event">
+              <a id="{{ event.slug }}"></a>
 
-      <h2 class="venue-name">
-        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+              <h1 class="event-title">
+                <span itemprop="name">{{ event.title }}</span>
+              </h1>
 
-        {% if event.venue.slug %}
 
-        <span itemprop="location" itemscope itemtype="http://schema.org/Place">
-          <a itemprop="url" href="{% url "events.venue_event_list" slug=event.venue.slug %}">
-            <span itemprop="name">{{ event.venue.name }}</span>
-            <span itemprop="address" content="{{ event.venue.address }}"></span>
-          </a>
-        </span>
+              <h2 class="starts-at">
+                <time itemprop="startDate" datetime="{{ event.starts_at|date:"Y-m-d\TG:i:s" }}">{{ event.starts_at|date }}, {{ event.starts_at|time }}</time>
+              </h2>
 
-        {% else %}
+              <h2 class="venue-name">
+                <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
 
-        <span itemprop="location" itemscope itemtype="http://schema.org/Place">
-          <a itemprop="url" href="{{ event.venue.map_url }}" title="{{ event.venue.address }}" target="new">
-            <span itemprop="name">{{ event.venue.name }}</span>
-            <span itemprop="address" content="{{ event.venue.address }}"></span>
-          </a>
-        </span>
+                {% if event.venue.slug %}
 
-        {% endif %}
+                <span itemprop="location" itemscope itemtype="http://schema.org/Place">
+                  <a itemprop="url" href="{% url "events.venue_event_list" slug=event.venue.slug %}">
+                    <span itemprop="name">{{ event.venue.name }}</span>
+                    <span itemprop="address" content="{{ event.venue.address }}"></span>
+                  </a>
+                </span>
 
-      </h2>
+                {% else %}
 
-      <div class="description" itemprop="description">
-        {{ event.description|linebreaks }}
+                <span itemprop="location" itemscope itemtype="http://schema.org/Place">
+                  <a itemprop="url" href="{{ event.venue.map_url }}" title="{{ event.venue.address }}" target="new">
+                    <span itemprop="name">{{ event.venue.name }}</span>
+                    <span itemprop="address" content="{{ event.venue.address }}"></span>
+                  </a>
+                </span>
+
+                {% endif %}
+
+              </h2>
+              </div>
+            </div>
+
+            <div class="col-md-5">
+              {% if event.event_image %}
+              <img class="event-image img-responsive" src="{{ event.event_image.url }}"></img>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+
+
+              <div class="description" itemprop="description">
+                {{ event.description|linebreaks }}
+              </div>
+
+              <p class="lead">
+                <a itemprop="url" class="btn btn-primary" href="{{ event.external_url }}" target="new">View on {{ event.external_domain }}</a>
+                <a class="btn btn-default" href="{% url "events.event_list" %}">See What's On in Liverpool</a>
+              </p>
+
+              <time itemProp="endDate" content="{{ event.starts_at|date:"Y-m-d" }}"></time>
+            </div>
+          </div>
+
+
+
       </div>
-
-      <p class="lead">
-        <a itemprop="url" class="btn btn-primary" href="{{ event.external_url }}" target="new">View on {{ event.external_domain }}</a>
-        <a class="btn btn-default" href="{% url "events.event_list" %}">See What's On in Liverpool</a>
-      </p>
-
-      <time itemProp="endDate" content="{{ event.starts_at|date:"Y-m-d" }}"></time>
     </div>
-
   </div>
 
 {% endblock %}
