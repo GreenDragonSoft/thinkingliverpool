@@ -242,7 +242,16 @@ class Event(models.Model):
     def get_future_url(self):
         return reverse('events.event_list') + '#{}'.format(self.slug)
 
-    def get_absolute_url(self):
+    def get_url(self):
+        """
+        Return the (actual) absolute URL, with protocol & domain.
+        https://code.djangoproject.com/wiki/ReplacingGetAbsoluteUrl
+        """
+        domain = Site.objects.get_current().domain
+
+        return 'https://{}{}'.format(domain, self.get_url_path())
+
+    def get_url_path(self):
         return reverse(
             'events.event_detail',
             kwargs={
@@ -251,6 +260,9 @@ class Event(models.Model):
                 'year': self.starts_at.date().year,
             }
         )
+
+    def get_absolute_url(self):
+        return self.get_url_path()
 
     def is_future(self):
         return self.starts_at.date() > timezone.today()
