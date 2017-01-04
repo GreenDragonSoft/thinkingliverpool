@@ -265,7 +265,7 @@ class Event(models.Model):
         return self.get_url_path()
 
     def is_future(self):
-        return self.starts_at.date() > timezone.today()
+        return self.starts_at.date() > timezone.now().date()
 
     def twitter_handles(self):
         handles = filter(None, [
