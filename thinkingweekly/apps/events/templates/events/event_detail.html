@@ -19,7 +19,7 @@
   <meta property="og:description" content="{{ event.description }}" />
 
   {% if event.event_image %}
-  <meta property="og:image"       content="{{ event.event_image }}" />
+  <meta property="og:image"       content="{{ event.event_image.url }}" />
   {% endif %}
 
 {% endblock %}
