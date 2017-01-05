@@ -3,7 +3,7 @@ STATIC = thinkingweekly/static
 
 SASS_FILES = $(ASSETS)/stylesheets/app.scss $(ASSETS)/stylesheets/app/thinkingliverpool.scss
 
-all: $(STATIC)/css/combined.min.css $(STATIC)/js/combined.min.js
+all: $(STATIC)/css/combined.min.css $(STATIC)/js/combined.min.js bootstrap_static_fonts
 
 $(STATIC)/css/combined.min.css: $(SASS_FILES)
 	sass $(ASSETS)/stylesheets/app.scss $@ --style compressed
@@ -11,10 +11,16 @@ $(STATIC)/css/combined.min.css: $(SASS_FILES)
 $(STATIC)/js/combined.min.js: $(ASSETS)/js/jquery-3.1.1.min.js $(ASSETS)/js/bootstrap.min.js
 	cat $^ > $@
 
+.PHONY: bootstrap_static_fonts
+bootstrap_static_fonts:
+	mkdir -p $(STATIC)/fonts/bootstrap
+	cp $(ASSETS)/vendor/bootstrap-sass-3.3.7/assets/fonts/bootstrap/* $(STATIC)/fonts/bootstrap/
+
 .PHONY: clean
 clean:
 	rm -f $(STATIC)/css/combined.min.css
 	rm -f $(STATIC)/css/combined.min.js
+	rm -f $(STATIC)/fonts/bootstrap/*
 
 
 .PHONY: test
