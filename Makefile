@@ -32,7 +32,7 @@ dumpdb: latest.sql
        echo 'Now do vagrant ssh, then: dropdb vagrant && createdb vagrant && psql < latest.sql'
 
 latest.dump:
-	heroku pg:backups capture
+	heroku pg:backups capture --app thinkingweekly
 	curl -o latest.dump `heroku pg:backups public-url`
 
 latest.sql: latest.dump
