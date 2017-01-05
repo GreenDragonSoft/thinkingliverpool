@@ -1,0 +1,67 @@
+      @media (min-width: 1200px) {
+* { box-sizing: border-box; }
+html { font-family: sans-serif; text-size-adjust: 100%; font-size: 10px; -webkit-tap-highlight-color: transparent; }
+body { margin: 0px; font-family: Georgia, "Times New Roman", Times, serif; font-size: 16px; line-height: 1.42857; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255); }
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary { display: block; }
+.navbar { position: relative; min-height: 65px; margin-bottom: 22px; border: 1px solid transparent; border-radius: 4px; font-family: Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.navbar-default { background-color: rgb(255, 255, 255); border-color: rgb(221, 221, 221); }
+.container-fluid { margin-right: auto; margin-left: auto; padding-left: 15px; padding-right: 15px; }
+.navbar-header { float: left; }
+.container > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-header, .container-fluid > .navbar-collapse { margin-right: 0px; margin-left: 0px; }
+a { background-color: transparent; color: rgb(69, 130, 236); text-decoration: none; }
+.navbar-brand { float: left; padding: 21.5px 15px; font-size: 20px; line-height: 1.9; height: 65px; padding-top: 12.5px; padding-bottom: 12.5px; }
+.navbar-default .navbar-brand { color: rgb(51, 51, 51); }
+.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand { margin-left: -15px; }
+button, input, optgroup, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; margin: 0px; }
+button { overflow: visible; }
+button, select { text-transform: none; }
+button, html input[type="button"], input[type="reset"], input[type="submit"] { -webkit-appearance: button; cursor: pointer; }
+input, button, select, textarea { font-family: inherit; font-size: inherit; line-height: inherit; }
+.navbar-toggle { position: relative; float: right; margin-right: 15px; padding: 9px 10px; margin-top: 15.5px; margin-bottom: 15.5px; background-color: transparent; background-image: none; border: 1px solid transparent; border-radius: 4px; display: none; }
+.navbar-default .navbar-toggle { border-color: rgb(221, 221, 221); }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0px; overflow: hidden; clip: rect(0px 0px 0px 0px); border: 0px; }
+.navbar-toggle .icon-bar { display: block; width: 22px; height: 2px; border-radius: 1px; }
+.navbar-default .navbar-toggle .icon-bar { background-color: rgb(204, 204, 204); }
+.navbar-toggle .icon-bar + .icon-bar { margin-top: 4px; }
+.collapse { display: none; }
+.navbar-collapse { overflow-x: visible; padding-right: 15px; padding-left: 15px; border-top: 0px; box-shadow: none; width: auto; }
+.navbar-collapse.collapse { padding-bottom: 0px; display: block !important; height: auto !important; overflow: visible !important; }
+.navbar-default .navbar-collapse, .navbar-default .navbar-form { border-color: rgb(221, 221, 221); }
+ul, ol { margin-top: 0px; margin-bottom: 11px; }
+.nav { margin-bottom: 0px; padding-left: 0px; list-style: none; }
+.navbar-nav { margin: 0px; float: left; }
+.navbar-right { margin-right: -15px; float: right !important; }
+.navbar-nav, .navbar-form { margin-left: 0px; margin-right: 0px; }
+.nav > li { position: relative; display: block; }
+.navbar-nav > li { float: left; }
+.nav > li > a { position: relative; display: block; padding: 10px 15px; }
+.navbar-nav > li > a { padding-top: 21.5px; padding-bottom: 21.5px; line-height: 22px; margin: 12.5px 6px; padding: 8px 12px; border: 1px solid transparent; border-radius: 4px; }
+.navbar-default .navbar-nav > li > a { color: rgb(69, 130, 236); }
+.navbar .navbar-nav > li > a { padding: 8px 12px; }
+.navbar-default .navbar-nav > li a, .navbar-default .navbar-nav > li a:hover { color: rgb(51, 51, 51); }
+.container { margin-right: auto; margin-left: auto; padding-left: 15px; padding-right: 15px; width: 1170px; }
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 { position: relative; min-height: 1px; padding-left: 15px; padding-right: 15px; }
+.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 { float: left; }
+.col-md-8 { width: 66.6667%; }
+.col-md-offset-2 { margin-left: 16.6667%; }
+h1 { font-size: 2em; margin: 0.67em 0px; }
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: bold; line-height: 1.1; color: inherit; }
+h1, .h1, h2, .h2, h3, .h3 { margin-top: 22px; margin-bottom: 11px; }
+h1, .h1 { font-size: 41px; }
+.panel { margin-bottom: 22px; background-color: rgb(255, 255, 255); border: 1px solid transparent; border-radius: 4px; box-shadow: none; }
+.panel-default { border-color: rgb(221, 221, 221); }
+.panel-heading { padding: 10px 15px; border-bottom: 1px solid transparent; border-top-right-radius: 3px; border-top-left-radius: 3px; }
+.panel-default > .panel-heading { color: rgb(51, 51, 51); background-color: rgb(245, 245, 245); border-color: rgb(221, 221, 221); }
+h2, .h2 { font-size: 34px; }
+.panel-title { margin-top: 0px; margin-bottom: 0px; font-size: 18px; color: inherit; }
+.event h2.panel-title { font-size: 24px; }
+.panel-title > a, .panel-title > small, .panel-title > .small, .panel-title > small > a, .panel-title > .small > a { color: inherit; }
+.panel-body { padding: 15px; }
+h3, .h3 { font-size: 28px; }
+.event h3 { font-size: 18px; margin-top: 0px; }
+.event span > a { color: inherit; }
+p { margin: 0px 0px 11px; }
+.btn { display: inline-block; margin-bottom: 0px; font-weight: normal; text-align: center; vertical-align: middle; touch-action: manipulation; cursor: pointer; background-image: none; border: 1px solid transparent; white-space: nowrap; padding: 8px 12px; font-size: 16px; line-height: 1.42857; border-radius: 4px; -webkit-user-select: none; font-family: Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.btn-primary { color: rgb(255, 255, 255); background-color: rgb(69, 130, 236); border-color: rgb(69, 130, 236); }
+.copyright: {display: none;}
+}
