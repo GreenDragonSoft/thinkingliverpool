@@ -186,6 +186,10 @@ section.venue-future-events a {
     }
   }
 
+  a.view-on-external-site {
+    margin-bottom: ($line-height-computed / 2);
+  }
+
   .twitter-share-box {
     a.twitter-share-button {
       margin-top: ($line-height-computed / 2);
