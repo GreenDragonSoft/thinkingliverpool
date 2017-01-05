@@ -1,22 +1,26 @@
 ASSETS = thinkingweekly/assets
 STATIC = thinkingweekly/static
 
-all: $(STATIC)/css/combined.min.css $(STATIC)/js/combined.min.js
-	
+SASS_FILES = $(ASSETS)/stylesheets/app.scss $(ASSETS)/stylesheets/app/thinkingliverpool.scss
 
-$(STATIC)/css/combined.min.css: $(ASSETS)/css/bootstrap.min.css $(ASSETS)/css/thinkingliverpool.min.css
+all: $(STATIC)/css/combined.min.css $(STATIC)/js/combined.min.js bootstrap_static_fonts
+
+$(STATIC)/css/combined.min.css: $(SASS_FILES)
+	sass $(ASSETS)/stylesheets/app.scss $@ --style compressed
+
+$(STATIC)/js/combined.min.js: $(ASSETS)/js/jquery-3.1.1.min.js $(ASSETS)/vendor/bootstrap-sass-3.3.7/assets/javascripts/bootstrap.min.js
 	cat $^ > $@
 
-$(STATIC)/js/combined.min.js: $(ASSETS)/js/jquery-3.1.1.min.js $(ASSETS)/js/bootstrap.min.js
-	cat $^ > $@
-
-$(ASSETS)/css/thinkingliverpool.min.css: $(ASSETS)/css/thinkingliverpool.css
-	yui-compressor $? > $@
+.PHONY: bootstrap_static_fonts
+bootstrap_static_fonts:
+	mkdir -p $(STATIC)/fonts/bootstrap
+	cp $(ASSETS)/vendor/bootstrap-sass-3.3.7/assets/fonts/bootstrap/* $(STATIC)/fonts/bootstrap/
 
 .PHONY: clean
 clean:
-	rm -f $(ASSETS)/css/thinkingliverpool.min.css
 	rm -f $(STATIC)/css/combined.min.css
+	rm -f $(STATIC)/js/combined.min.js
+	rm -f $(STATIC)/fonts/bootstrap/*
 
 
 .PHONY: test
