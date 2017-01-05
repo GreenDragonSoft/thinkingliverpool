@@ -1,3 +1,18 @@
+.navbar-default .navbar-brand {
+  color: $text-color;
+
+  &:hover {
+    color: $text-color;
+  }
+}
+
+.navbar-default .navbar-nav > li  {
+  a, a:hover {
+    color: $text-color;
+  }
+}
+
+
 .site-home-banner {
   margin-top: -22px;  /* shift up past navbar padding */
   background-image: url('../img/thinking-liverpool-whats-on.jpg');
@@ -16,13 +31,13 @@
 
     h2 {
       font-size: 28px;
-      color: rgb(69, 130, 236); // TODO: make black
+      color: $text-color;
     }
 
     li {
       background: none;
       border: none;
-      color: rgb(69, 130, 236); // TODO: make black
+      color: $text-color;
       font-weight: bold;
     }
   }
