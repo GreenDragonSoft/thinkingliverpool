@@ -180,6 +180,21 @@ section.venue-future-events a {
     &.hidden-xs {
       width: 50%;
     }
+
+    &.hidden-lg {
+      margin-bottom: $line-height-computed;
+    }
+  }
+
+  .twitter-share-box {
+    a.twitter-share-button {
+      margin-top: ($line-height-computed / 2);
+    }
+
+    textarea {
+      height: ($line-height-computed * 3);
+    }
+
   }
 }
 
