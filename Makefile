@@ -1,26 +1,20 @@
 ASSETS = thinkingweekly/assets
 STATIC = thinkingweekly/static
 
-all: $(STATIC)/css/combined.min.css $(STATIC)/js/combined.min.js
-	
+SASS_FILES = $(ASSETS)/stylesheets/app.scss $(ASSETS)/stylesheets/app/thinkingliverpool.scss
 
-$(STATIC)/css/combined.min.css: $(ASSETS)/css/bootstrap.min.css $(ASSETS)/css/thinkingliverpool.min.css
-	cat $^ > $@
+all: $(STATIC)/css/combined.min.css $(STATIC)/js/combined.min.js
+
+$(STATIC)/css/combined.min.css: $(SASS_FILES)
+	sass $(ASSETS)/stylesheets/app.scss $@ --style compressed
 
 $(STATIC)/js/combined.min.js: $(ASSETS)/js/jquery-3.1.1.min.js $(ASSETS)/js/bootstrap.min.js
 	cat $^ > $@
 
-$(ASSETS)/css/thinkingliverpool.min.css: $(ASSETS)/css/thinkingliverpool.css
-	yui-compressor $? > $@
-
-$(ASSETS)/css/bootstrap.min.css: $(ASSETS)/stylesheets/app.scss
-	sass $? $@ --style compressed
-
 .PHONY: clean
 clean:
-	rm -f $(ASSETS)/css/thinkingliverpool.min.css
-	rm -f $(ASSETS)/css/bootstrap.min.css
 	rm -f $(STATIC)/css/combined.min.css
+	rm -f $(STATIC)/css/combined.min.js
 
 
 .PHONY: test
