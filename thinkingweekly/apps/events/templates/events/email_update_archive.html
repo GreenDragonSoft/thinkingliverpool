@@ -32,7 +32,9 @@
     </div>
 
 
-    {% include "events/partials/event_list.html" with events=update.events only %}
+    <div class="email-update-archive-event-list">
+      {% include "events/partials/event_list.html" with events=update.events only %}
+    </div>
 
   </div>
 
