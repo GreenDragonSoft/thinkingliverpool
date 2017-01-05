@@ -19,7 +19,7 @@ bootstrap_static_fonts:
 .PHONY: clean
 clean:
 	rm -f $(STATIC)/css/combined.min.css
-	rm -f $(STATIC)/css/combined.min.js
+	rm -f $(STATIC)/js/combined.min.js
 	rm -f $(STATIC)/fonts/bootstrap/*
 
 
