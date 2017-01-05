@@ -237,7 +237,7 @@ class Event(models.Model):
     have_posted_twitter = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.title
+        return 'Event({}, "{}")'.format(self.pk, self.title)
 
     def get_future_url(self):
         return reverse('events.event_list') + '#{}'.format(self.slug)
