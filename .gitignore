@@ -6,3 +6,4 @@ settings_secret.sh
 latest.dump
 latest.sql
 .sass-cache/
+*.css.map
