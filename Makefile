@@ -13,9 +13,13 @@ $(STATIC)/js/combined.min.js: $(ASSETS)/js/jquery-3.1.1.min.js $(ASSETS)/js/boot
 $(ASSETS)/css/thinkingliverpool.min.css: $(ASSETS)/css/thinkingliverpool.css
 	yui-compressor $? > $@
 
+$(ASSETS)/css/bootstrap.min.css: $(ASSETS)/stylesheets/app.scss
+	sass $? $@ --style compressed
+
 .PHONY: clean
 clean:
 	rm -f $(ASSETS)/css/thinkingliverpool.min.css
+	rm -f $(ASSETS)/css/bootstrap.min.css
 	rm -f $(STATIC)/css/combined.min.css
 
 
