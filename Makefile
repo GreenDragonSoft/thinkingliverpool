@@ -8,7 +8,7 @@ all: $(STATIC)/css/combined.min.css $(STATIC)/js/combined.min.js bootstrap_stati
 $(STATIC)/css/combined.min.css: $(SASS_FILES)
 	sass $(ASSETS)/stylesheets/app.scss $@ --style compressed
 
-$(STATIC)/js/combined.min.js: $(ASSETS)/js/jquery-3.1.1.min.js $(ASSETS)/js/bootstrap.min.js
+$(STATIC)/js/combined.min.js: $(ASSETS)/js/jquery-3.1.1.min.js $(ASSETS)/vendor/bootstrap-sass-3.3.7/assets/javascripts/bootstrap.min.js
 	cat $^ > $@
 
 .PHONY: bootstrap_static_fonts
