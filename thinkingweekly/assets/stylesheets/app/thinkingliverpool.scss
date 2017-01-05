@@ -31,13 +31,13 @@
 
     h2 {
       font-size: 28px;
-      color: rgb(69, 130, 236); // TODO: make black
+      color: $text-color;
     }
 
     li {
       background: none;
       border: none;
-      color: rgb(69, 130, 236); // TODO: make black
+      color: $text-color;
       font-weight: bold;
     }
   }
