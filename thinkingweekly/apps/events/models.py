@@ -264,6 +264,9 @@ class Event(models.Model):
     def get_absolute_url(self):
         return self.get_url_path()
 
+    def get_short_link(self):
+        return 'thinkingliverpool.com/e{}'.format(self.id)
+
     def is_future(self):
         return self.starts_at.date() > timezone.now().date()
 
@@ -292,8 +295,10 @@ class Event(models.Model):
         when = timezone.localtime(self.starts_at).strftime('%a %H:%M')
         twitters = self.twitter_handles()
 
+        short_link = self.get_short_link()
+
         TWEET_LENGTH = 140
-        URL_LENGTH = len('thinkingliverpool.com/e') + len(str(self.id))
+        URL_LENGTH = len(short_link)
 
         available_characters = TWEET_LENGTH - (
             URL_LENGTH + len(twitters) + len(when) + 3)
@@ -310,7 +315,7 @@ class Event(models.Model):
             title,
             when,
             twitters,
-            'thinkingliverpool.com/e{}'.format(self.id),
+            short_link,
         ]))
 
 

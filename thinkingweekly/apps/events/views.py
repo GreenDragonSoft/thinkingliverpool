@@ -1,5 +1,6 @@
 import calendar
 import datetime
+import random
 import re
 
 from icalendar import Calendar, Event as icalEvent
@@ -62,6 +63,21 @@ class EventDetail(DetailView):
     model = Event
     context_object_name = 'event'
     template_name = "events/event_detail.html"
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super(EventDetail, self).get_context_data(
+            *args, **kwargs)
+
+        tweet_text = random.choice([
+            'Anyone fancy this? "{title}"',
+            'This sounds good: "{title}"',
+        ])
+        ctx['tweet_text'] = tweet_text.format(
+            title=self.object.title,
+            day=self.object.starts_at.strftime('%A'),
+        )
+
+        return ctx
 
 
 class PastEventList(TemplateView):

@@ -85,16 +85,67 @@
               </div>
 
               {% if event.event_image %}
+                <div class="large-image-wrapper">
                 <!-- note: this one's for "tiny" screens and shows full width -->
-                <img class="event-image img-responsive pull-right hidden-sm hidden-md hidden-lg" src="{{ event.event_image.thumbnail.750x750 }}"></img>
+                <img class="event-image img-responsive hidden-sm hidden-md hidden-lg" src="{{ event.event_image.thumbnail.750x750 }}"></img>
+                </div>
+              {% endif %}
+
+              {% if event.is_future %}
+                <div class="panel panel-default twitter-share-box">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Share this event on Twitter</h3>
+                  </div>
+                  <div class="panel-body">
+                    <textarea id="tweet-message" class="tweetmsg form-control"
+                              rows="1">{{ tweet_text }}</textarea>
+
+                    <a id="tweet-button" class="btn btn-primary pull-right twitter-share-button"
+                        href="#"
+                        data-size="large">
+                          Tweet
+                    </a>
+                  </div>
+                </div>
               {% endif %}
 
               <p class="lead">
-                <a itemprop="url" class="btn btn-primary" href="{{ event.external_url }}" target="new">View on {{ event.external_domain }}</a>
+                <a itemprop="url" class="btn btn-primary view-on-external-site" href="{{ event.external_url }}" target="new">View on {{ event.external_domain }}</a>
                 <a class="btn btn-default" href="{% url "events.event_list" %}">See What's On in Liverpool</a>
               </p>
 
               <time itemProp="endDate" content="{{ event.starts_at|date:"Y-m-d" }}"></time>
             </div>
 
+
+{% if event.is_future %}
+  <script>
+  function ready(fn) {
+    if (document.readyState != 'loading'){
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
+
+  function populateTweetButtonLink(event) {
+    var tweetTextArea = document.getElementById('tweet-message'),
+        tweetButton = document.getElementById('tweet-button');
+
+    tweetButton.href = 'https://twitter.com/intent/tweet?url=http://{{ event.get_short_link }}&via=ThinkingLiv&text=' + tweetTextArea.value;
+
+  }
+
+  ready(function() {
+    var tweetTextArea = document.getElementById('tweet-message'),
+        tweetButton = document.getElementById('tweet-button');
+
+    tweetButton.addEventListener('click', populateTweetButtonLink);
+  });
+  </script>
+{% endif %}
+
 {% endblock %}
+
+
+
