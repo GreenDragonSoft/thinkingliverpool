@@ -167,18 +167,16 @@ section.venue-future-events a {
 
 /* Event detail page */
 
-.event-detail .event-title {
-  font-size: 36px;
+.event-detail {
+
+  .event-title { font-size: 36px; }
+  .starts-at   { font-size: 24px; }
+  .venue-name  { font-size: 24px; }
+  .description { padding-bottom: 20px; }
+  .event-image {
+    margin-top: $line-height-computed;
+    margin-bottom: $line-height-computed;
+  }
 }
 
-.event-detail .starts-at {
-  font-size: 24px;
-}
 
-.event-detail .venue-name {
-  font-size: 24px;
-}
-
-.event-detail .description {
-  padding-bottom: 20px;
-}

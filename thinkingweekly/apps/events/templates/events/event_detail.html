@@ -38,7 +38,7 @@
 
 {% block content_in_narrow_column %}
 
-        <div class="row">
+        <div class="row event-detail">
 
           {% if event.event_image %}
           <div class="col-md-7">
@@ -46,7 +46,7 @@
           <div class="col-md-12"><!-- no image, make title section full width -->
           {% endif %}
 
-            <div class="event-detail" itemscope itemtype="http://schema.org/Event">
+            <div itemscope itemtype="http://schema.org/Event">
               <a id="{{ event.slug }}"></a>
 
               <h1 class="event-title">
