@@ -37,8 +37,14 @@
 
       </h3>
 
-      <div itemprop="description">
-        {{ event.description|linebreaks }}
+      <div>
+        {% if event.event_image %}
+        <img class="event-image img-responsive {% cycle 'pull-left' 'pull-right' %}" src="{{ event.event_image.thumbnail.350x350 }}"></img>
+        {% endif %}
+
+        <div itemprop="description">
+          {{ event.description|linebreaks }}
+        </div>
       </div>
 
       <time itemProp="endDate" datetime="{{ event.starts_at|date:"Y-m-d" }}"></time>

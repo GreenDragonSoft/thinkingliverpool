@@ -152,6 +152,19 @@ section.venue-future-events a {
   /* display: block;*/
 }
 
+
+/* Future event list, email archive event list */
+
+.email-update-archive-event-list,
+.future-event-list {
+  img.event-image {
+    width: 50%;
+
+    &.pull-left { margin-right: 10px; }
+    &.pull-right { margin-left: 10px; }
+  }
+}
+
 /* Event detail page */
 
 .event-detail .event-title {
