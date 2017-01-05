@@ -38,21 +38,17 @@
 
 {% block content_in_narrow_column %}
 
-        <div class="row">
-
-          {% if event.event_image %}
-          <div class="col-md-7">
-          {% else %}
-          <div class="col-md-12"><!-- no image, make title section full width -->
-          {% endif %}
-
             <div class="event-detail" itemscope itemtype="http://schema.org/Event">
               <a id="{{ event.slug }}"></a>
+
+              {% if event.event_image %}
+                <!-- note: this one's for "big screens" and shows 50% of the width -->
+                <img class="event-image pull-right hidden-xs" src="{{ event.event_image.thumbnail.750x750 }}"></img>
+              {% endif %}
 
               <h1 class="event-title">
                 <span itemprop="name">{{ event.title }}</span>
               </h1>
-
 
               <h2 class="starts-at">
                 <time itemprop="startDate" datetime="{{ event.starts_at|date:"Y-m-d\TG:i:s" }}">{{ event.starts_at|date }}, {{ event.starts_at|time }}</time>
@@ -82,23 +78,16 @@
                 {% endif %}
 
               </h2>
-              </div>
-            </div>
-
-            <div class="col-md-5">
-              {% if event.event_image %}
-              <img class="event-image img-responsive" src="{{ event.event_image.url }}"></img>
-              {% endif %}
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-12">
 
 
               <div class="description" itemprop="description">
                 {{ event.description|linebreaks }}
               </div>
+
+              {% if event.event_image %}
+                <!-- note: this one's for "tiny" screens and shows full width -->
+                <img class="event-image img-responsive pull-right hidden-sm hidden-md hidden-lg" src="{{ event.event_image.thumbnail.750x750 }}"></img>
+              {% endif %}
 
               <p class="lead">
                 <a itemprop="url" class="btn btn-primary" href="{{ event.external_url }}" target="new">View on {{ event.external_domain }}</a>
@@ -107,9 +96,5 @@
 
               <time itemProp="endDate" content="{{ event.starts_at|date:"Y-m-d" }}"></time>
             </div>
-          </div>
-
-        </div>
-
 
 {% endblock %}
