@@ -1,40 +1,36 @@
 .site-home-banner {
   margin-top: -22px;  /* shift up past navbar padding */
-  /* width: 100%;
-  height: 840px;
-  height: 100%;
-  height: calc(100% - 1px);
-*/
   background-image: url('../img/thinking-liverpool-whats-on.jpg');
   background-size: cover;
-}
 
-.site-home-banner img {
-  width: 100%;
-}
+  img {
+    width: 100%;
+  }
 
-.site-home-banner h1, .site-home-banner h2 {
-  color: white;
+  h1, h2 {
+    color: white;
+  }
+  
+  .jumbotron {
+    background-color:  rgba(247,247,247, 0.8);
+
+    h2 {
+      font-size: 28px;
+      color: rgb(69, 130, 236); // TODO: make black
+    }
+
+    li {
+      background: none;
+      border: none;
+      color: rgb(69, 130, 236); // TODO: make black
+      font-weight: bold;
+    }
+  }
+
 }
 
 h1.explainer {
   font-weight: lighter;
-}
-
-.site-home-banner .jumbotron {
-  background-color:  rgba(247,247,247, 0.8);
-}
-
-.site-home-banner .jumbotron h2 {
-  font-size: 28px;
-  color: rgb(69, 130, 236);
-}
-
-.site-home-banner .jumbotron li {
-  background: none;
-  border: none;
-  color: rgb(69, 130, 236);
-  font-weight: bold;
 }
 
 div.subscribe-form {
@@ -90,15 +86,15 @@ p.see-future-events {
 .venue-image {
   position: relative;
   padding-bottom: 20px;
-}
 
-.venue-image > h3 {
-  position: absolute;
-  top: 75%;
-  left: 0;
-  width: 100%;
-  color: white;
-  background: black;
+  h3 {
+    position: absolute;
+    top: 75%;
+    left: 0;
+    width: 100%;
+    color: white;
+    background: black;
+  }
 }
 
 @media (max-width: 400px) {
@@ -111,12 +107,13 @@ p.see-future-events {
 
 section.venue-information {
   margin-bottom: 20px;
+
+  a {
+    padding-right: 10px;
+  }
 }
 
-section.venue-information a {
-  padding-right: 10px;
-}
-
+section.venue-information 
 section.venue-information .fa {
   /* Prevent the icon and the text from getting separated
    * http://stackoverflow.com/a/25233914
