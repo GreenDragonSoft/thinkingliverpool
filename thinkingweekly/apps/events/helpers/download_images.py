@@ -29,7 +29,7 @@ def download_missing_images():
     events_with_missing_images = Event.objects.filter(
         external_image_url__isnull=False,
         event_image=''
-    )
+    ).exclude(external_image_url='')
 
     LOG.info("Getting images for {} events".format(
         events_with_missing_images.count()
