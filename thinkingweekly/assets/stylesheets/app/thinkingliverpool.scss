@@ -25,12 +25,13 @@
   h1, h2 {
     color: white;
   }
-  
+
   .jumbotron {
     background-color:  rgba(247,247,247, 0.8);
 
     h2 {
       font-size: 28px;
+      margin-top: 0;
       color: $text-color;
     }
 
@@ -39,6 +40,10 @@
       border: none;
       color: $text-color;
       font-weight: bold;
+    }
+
+    .subscribe-form {
+      margin-bottom: 0;
     }
   }
 
