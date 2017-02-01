@@ -13,18 +13,19 @@
     {% include "events/partials/meta_noindex.html" %}
   {% endif %}
 
-  <meta name="twitter:card"       content="summary_large_image">
+  {% if event.event_image %}
+    <meta name="twitter:card"       content="summary_large_image">
+    <meta property="og:image" content="{{ event.event_image.url }}" />
+  {% else %}
+    <meta name="twitter:card"       content="summary">
+    <meta property="og:image" content="{% static "img/whats-on-in-liverpool-light-bulb.png" %}" />
+  {% endif %}
+
   <meta name="twitter:site"       content="@ThinkingLiv">
   <meta property="og:type"        content="article" />
   <meta property="og:url"         content="{{ event.get_url }}" />
   <meta property="og:title"       content="{{ event.title }}" />
   <meta property="og:description" content="{{ event.description }}" />
-
-  {% if event.event_image %}
-    <meta property="og:image" content="{{ event.event_image.url }}" />
-  {% else %}
-    <meta property="og:image" content="{% static "img/whats-on-in-liverpool-light-bulb.png" %}" />
-  {% endif %}
 
 {% endblock %}
 
