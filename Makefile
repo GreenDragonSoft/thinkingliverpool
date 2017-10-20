@@ -37,7 +37,7 @@ dumpdb: latest.sql
 
 latest.dump:
 	heroku pg:backups capture --app thinkingweekly
-	curl -o latest.dump `heroku pg:backups public-url`
+	curl -o latest.dump `heroku pg:backups public-url --app thinkingweekly`
 
 latest.sql: latest.dump
 	# convert dump file to SQL
