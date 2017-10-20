@@ -1,6 +1,10 @@
 #!/bin/sh -eux
 
 
+install_custom_bashrc() {
+  cp /home/vagrant/app/vagrant/bashrc /home/vagrant/.bashrc
+}
+
 update_apt() {
   apt-get update
 }
@@ -34,6 +38,7 @@ create_postgresql_database_and_user() {
     su -c "${CREATE_DATABASE}" postgres || true
 }
 
+install_custom_bashrc
 update_apt
 install_postgresql
 install_system_dependencies
