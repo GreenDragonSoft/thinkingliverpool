@@ -42,29 +42,31 @@
   </div>
 
   <div class="container">
-    <section class="main-event">
+    {% if next_event %}
+      <section class="main-event">
 
-    <h2>Coming up...</h2>
+      <h2>Coming up...</h2>
 
-      <div class="row">
-        <div class="col-md-12">
-          <a href="{{ next_event.get_future_url }}">
-            <div class="well">
-              <h3>{{ next_event.title }}</h3>
-              <h4>{{ next_event.starts_at|date }} at {{ next_event.starts_at|time }}</h4>
-            </div>
-        </a>
+        <div class="row">
+          <div class="col-md-12">
+            <a href="{{ next_event.get_future_url }}">
+              <div class="well">
+                <h3>{{ next_event.title }}</h3>
+                <h4>{{ next_event.starts_at|date }} at {{ next_event.starts_at|time }}</h4>
+              </div>
+          </a>
 
+          </div>
         </div>
-      </div>
 
-      <p class="see-future-events">
-        <a class="btn btn-primary" href="{% url "events.event_list" %}">
-          See more events
-        </a>
-      </p>
+        <p class="see-future-events">
+          <a class="btn btn-primary" href="{% url "events.event_list" %}">
+            See more events
+          </a>
+        </p>
 
-    </section>
+      </section>
+    {% endif %}
 
     <hr>
 
