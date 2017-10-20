@@ -33,7 +33,10 @@ run:
 
 .PHONY: dumpdb
 dumpdb: latest.sql
-       echo 'Now do vagrant ssh, then: dropdb vagrant && createdb vagrant && psql < latest.sql'
+	killall python
+	dropdb vagrant
+	createdb vagrant
+	psql < latest.sql
 
 latest.dump:
 	heroku pg:backups capture --app thinkingweekly
