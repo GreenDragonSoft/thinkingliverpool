@@ -5,6 +5,14 @@ install_custom_bashrc() {
   cp /home/vagrant/app/vagrant/bashrc /home/vagrant/.bashrc
 }
 
+install_heroku_apt_repository() {
+  # add heroku repository to apt
+  echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
+
+  # install heroku's release key for package verification
+  wget -q -O- https://toolbelt.heroku.com/apt/release.key | apt-key add -
+}
+
 update_apt() {
   apt-get update
 }
@@ -21,7 +29,8 @@ install_system_dependencies() {
     python-virtualenv \
     libjpeg-dev \
     ruby-dev \
-    unzip
+    unzip \
+    heroku-toolbelt
 
   sass --version || gem install sass
   listen --version || gem install listen
@@ -48,6 +57,7 @@ create_postgresql_database_and_user() {
 }
 
 install_custom_bashrc
+install_heroku_apt_repository
 update_apt
 install_postgresql
 install_system_dependencies
