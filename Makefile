@@ -27,8 +27,8 @@ clean:
 test:
 	./manage.py test -v 3 --failfast
 
-.PHONY: runserver
-runserver:
+.PHONY: run
+run:
 	./manage.py runserver 0.0.0.0:8000
 
 .PHONY: dumpdb
