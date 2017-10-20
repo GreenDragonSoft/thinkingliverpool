@@ -34,20 +34,8 @@ create_postgresql_database_and_user() {
     su -c "${CREATE_DATABASE}" postgres || true
 }
 
-install_ngrok() {
-  if [ ! -f "/usr/local/bin/ngrok" ] ; then
-    cd /tmp/download
-    wget -c https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
-    unzip -o ngrok-stable-linux-amd64.zip
-    mv ngrok /usr/local/bin/ngrok
-    cd -
-  fi
-}
-
-
 update_apt
 install_postgresql
 install_system_dependencies
 setup_virtualenv
 create_postgresql_database_and_user
-install_ngrok
