@@ -42,9 +42,3 @@ latest.dump:
 latest.sql: latest.dump
 	# convert dump file to SQL
 	pg_restore --no-acl --no-owner -f latest.sql latest.dump
-
-
-
-.PHONY: tunnel
-tunnel:
-	ngrok http -region=eu -subdomain=thinkingweekly-xegef 8000
