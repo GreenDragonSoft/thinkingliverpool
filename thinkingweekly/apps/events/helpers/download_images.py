@@ -46,9 +46,14 @@ def download_image_for_event(event):
     assert event.external_image_url is not None
     assert not bool(event.event_image)
 
-    temp_file = download_image_as_temp_file(event.external_image_url)
-
-    store_event_image(temp_file, event)
+    try:
+        temp_file = download_image_as_temp_file(event.external_image_url)
+    except UnknownImageFileType as e:
+        LOG.exception(e)
+        event.external_image_url = None
+        event.save()
+    else:
+        store_event_image(temp_file, event)
 
 
 @backoff.on_exception(backoff.expo, REQUEST_EXCEPTIONS, max_tries=8)
