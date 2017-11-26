@@ -13,7 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "bento/ubuntu-16.04"
-  config.vm.synced_folder "./vagrant/.apt-cache", "/var/cache/apt/archives"
+  config.vm.synced_folder "~/.cache/vagrant-apt-archive", "/var/cache/apt/archives"
   config.vm.synced_folder "./vagrant/.tmp-download-cache", "/tmp/download"
 
   # The url from where the 'config.vm.box' box will be fetched if it
