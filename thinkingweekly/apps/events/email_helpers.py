@@ -20,7 +20,7 @@ def send_update_by_email(update):
     ).strip('\r\n')
 
     # TODO
-    from_address = 'Paul Furley <thinkingliverpool@paulfurley.com>'
+    from_address = 'Paul Fawkesley <thinkingliverpool@paulfurley.com>'
 
     recipient_list = [
         settings.MAILCHIMP_EMAIL_BEAMER,
